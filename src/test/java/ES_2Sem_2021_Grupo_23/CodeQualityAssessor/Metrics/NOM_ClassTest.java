@@ -1,4 +1,4 @@
-package ES_2Sem_2021_Grupo_23.CodeQualityAssessor;
+package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ import com.github.javaparser.utils.Pair;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
 
 class NOM_ClassTest {
-
+	
 	@Test
 	void GrammarException() {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\GrammerException.java");
