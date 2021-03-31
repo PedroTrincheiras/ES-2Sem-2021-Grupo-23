@@ -1,4 +1,4 @@
-package ES_2Sem_2021_Grupo_23.CodeQualityAssessor;
+package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics;
 
 import java.io.File;
 import java.io.FileNotFoundException;
