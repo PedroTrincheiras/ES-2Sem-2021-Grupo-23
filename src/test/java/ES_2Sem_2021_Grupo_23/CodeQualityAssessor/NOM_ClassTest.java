@@ -42,6 +42,15 @@ class NOM_ClassTest {
 	}
 	
 	@Test
+	void ConstantPoolGenerator() {
+		File file = new File("jasmlFiles\\com\\jasml\\compiler\\ConstantPoolGenerator.java");
+		List<Pair<String, Integer>> numberOfMethods = NOM_Class.getNOM(file);
+		List<Pair<String, Integer>> expectedNumberOfMethods = new ArrayList<Pair<String,Integer>>();
+		expectedNumberOfMethods.add(new Pair<String, Integer>("ConstantPoolGenerator", 25));
+		assertEquals(expectedNumberOfMethods, numberOfMethods);
+	}
+	
+	@Test
 	void Undefined() {
 		File file = new File("Undefined");
 		List<Pair<String, Integer>> numberOfMethods = NOM_Class.getNOM(file);
