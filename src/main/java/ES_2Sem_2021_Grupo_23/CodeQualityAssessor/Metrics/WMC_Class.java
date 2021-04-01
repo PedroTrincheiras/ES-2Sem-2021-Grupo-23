@@ -9,11 +9,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.ast.expr.BinaryExpr.Operator;
-import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.stmt.DoStmt;
-import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForEachStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
@@ -60,19 +56,6 @@ public class WMC_Class {
 		return l.size() + coid.getMethods().size() + coid.getConstructors().size();
 	}
 	
-	
-	/**
-	 * Counts the number of or's and and's in a expression
-	 * 
-	 * @param ex - a Expression
-	 * @return number of or's and and's in a expression (ex)
-	 */
-	private static List<Node> getOrsAnds(Expression ex) {
-		List<Node> l = new ArrayList<Node>();
-		ExpressionVisitor es = new ExpressionVisitor();
-		es.visit(new ExpressionStmt(ex) , l);
-		return l;
-	}
 
 	private static class Visitor extends VoidVisitorAdapter<List<Node>> {
 
@@ -91,42 +74,28 @@ public class WMC_Class {
 		@Override
 		public void visit(IfStmt is, List<Node> collector) {
 			super.visit(is, collector);
-			collector.addAll(getOrsAnds(is.getCondition()));
 			collector.add(is);
 		}
 
 		@Override
 		public void visit(WhileStmt ws, List<Node> collector) {
 			super.visit(ws, collector);
-			collector.addAll(getOrsAnds(ws.getCondition()));
 			collector.add(ws);
 		}
 		
 		@Override
-		public void visit(SwitchStmt ss, List<Node> collector) {
-			super.visit(ss, collector);
-			collector.addAll(ss.getEntries());
-		}
+        public void visit(SwitchStmt ss, List<Node> collector) {
+            super.visit(ss, collector);
+            collector.addAll(ss.getEntries());
+
+        }
 		
 		@Override
 		public void visit(DoStmt ds, List<Node> collector) {
 			super.visit(ds, collector);
-			collector.addAll(getOrsAnds(ds.getCondition()));
 			collector.add(ds);
 		}
 		
-	}
-	
-	private static class ExpressionVisitor extends VoidVisitorAdapter<List<Node>> {
-
-		@Override
-		public void visit(BinaryExpr be, List<Node> collector) {
-			super.visit(be, collector);
-			if(be.getOperator() == Operator.OR || be.getOperator() == Operator.AND) {
-				collector.add(be);
-			}
-		}
-
 	}
 
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Pair<String, Integer>>> {
