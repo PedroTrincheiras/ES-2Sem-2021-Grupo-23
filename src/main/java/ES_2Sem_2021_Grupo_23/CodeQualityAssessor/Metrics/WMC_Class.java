@@ -84,11 +84,11 @@ public class WMC_Class {
 		}
 		
 		@Override
-        public void visit(SwitchStmt ss, List<Node> collector) {
-            super.visit(ss, collector);
-            collector.addAll(ss.getEntries());
+		public void visit(SwitchStmt ss, List<Node> collector) {
+		    super.visit(ss, collector);
+		    collector.addAll(ss.getEntries());
 
-        }
+		}
 		
 		@Override
 		public void visit(DoStmt ds, List<Node> collector) {
