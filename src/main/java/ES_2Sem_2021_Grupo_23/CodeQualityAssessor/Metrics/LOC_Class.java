@@ -15,6 +15,12 @@ import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinte
 
 public class LOC_Class {
 	
+	/**
+	 * Receives a file and counts the lines of the classes in that file
+	 * 
+	 * @param file - to count lines in classes
+	 * @return contains the name of the class and the respective number of lines of that class
+	 */
 	public static List<Pair<String, Integer>> getLOC_Class(File file) {
 		List<Pair<String, Integer>> classes = new ArrayList<Pair<String, Integer>>();
 		try {

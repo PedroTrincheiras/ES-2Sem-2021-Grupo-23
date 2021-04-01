@@ -9,6 +9,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.stmt.DoStmt;
 import com.github.javaparser.ast.stmt.ForEachStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
@@ -41,6 +42,20 @@ public class WMC_Class {
 		}
 		return classes;
 	}
+	
+	/**
+	 * Counts the number of if, for, forEach, while, and cases in a class/interface
+	 * 
+	 * @param coid - a class/interface
+	 * @return number of if, for, forEach, while, and cases of the class/interface (coid)
+	 */
+	private static int getClassWMC(ClassOrInterfaceDeclaration coid) {
+		List<Node> l = new ArrayList<Node>();
+		Visitor v = new Visitor();
+		v.visit(coid, l);
+		return l.size() + coid.getMethods().size() + coid.getConstructors().size();
+	}
+	
 
 	private static class Visitor extends VoidVisitorAdapter<List<Node>> {
 
@@ -70,9 +85,17 @@ public class WMC_Class {
 		
 		@Override
 		public void visit(SwitchStmt ss, List<Node> collector) {
-			super.visit(ss, collector);
-			collector.add(ss);
+		    super.visit(ss, collector);
+		    collector.addAll(ss.getEntries());
+
 		}
+		
+		@Override
+		public void visit(DoStmt ds, List<Node> collector) {
+			super.visit(ds, collector);
+			collector.add(ds);
+		}
+		
 	}
 
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Pair<String, Integer>>> {
@@ -81,19 +104,6 @@ public class WMC_Class {
 			super.visit(coid, collector);
 			collector.add(new Pair<String, Integer>(coid.getNameAsString(), getClassWMC(coid)));
 		}
-	}
-
-	/**
-	 * Counts the number of if, for, forEach, while, and cases in a class/interface
-	 * 
-	 * @param coid - a class/interface
-	 * @return number of if, for, forEach, while, and cases of the class/interface (coid)
-	 */
-	private static int getClassWMC(ClassOrInterfaceDeclaration coid) {
-		List<Node> l = new ArrayList<Node>();
-		Visitor v = new Visitor();
-		v.visit(coid, l);
-		return l.size();
 	}
 
 }
