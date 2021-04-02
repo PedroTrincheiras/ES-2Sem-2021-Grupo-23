@@ -43,10 +43,10 @@ public class Generate_XLSX_With_Metrics {
 		Map<Integer, Object[]> data = loadDirectory(folder);
 		String[] foldername = folder.split("/");
 		String name = foldername[foldername.length - 1];
-		writeXLSX(data, name);
+		writeToFile(generateWorkbook(data),name);
 	}
 
-	private static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
+	public static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
 		Map<Integer, Object[]> data = new TreeMap<Integer, Object[]>();
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))) {
 			//coloca em files todos os ficheiros .java existentes no diretorio e nos seus subdiretorios
@@ -97,7 +97,7 @@ public class Generate_XLSX_With_Metrics {
 	}
 
 	
-	private static void writeXLSX(Map<Integer, Object[]> data, String name) {
+	public static XSSFWorkbook generateWorkbook(Map<Integer, Object[]> data) {
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Metrics");
@@ -107,7 +107,6 @@ public class Generate_XLSX_With_Metrics {
 		Collections.sort(l);
 		int rownum = 0;
 		for (Integer key : l) {
-			System.out.println(key);
 			Row row = sheet.createRow(rownum++);
 			Object[] objArr = data.get(key);
 			int cellnum = 0;
@@ -119,13 +118,16 @@ public class Generate_XLSX_With_Metrics {
 					cell.setCellValue((Integer) obj);
 			}
 		}
+		return workbook;
+	}
+	
+	private static void writeToFile(XSSFWorkbook workbook, String name) {
 		try {
 			// Write the workbook in file system
 			FileOutputStream out = new FileOutputStream(new File(name + "_metrics.xlsx"));
 			workbook.write(out);
 			workbook.close();
 			out.close();
-			System.out.println("howtodoinjava_demo.xlsx written successfully on disk.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
