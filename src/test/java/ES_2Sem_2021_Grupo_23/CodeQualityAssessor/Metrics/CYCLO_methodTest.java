@@ -37,6 +37,7 @@ class CYCLO_methodTest {
 		expectedCyclos.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(String, Exception)", 1));
 		expectedCyclos.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(String)", 1));
 		expectedCyclos.add(new Triplet<String, String, Integer>("ParsingException","getMessage()", 6));
+		expectedCyclos.add(new Triplet<String, String, Integer>("ParsingException","forEachTest(String)", 2));
 		assertEquals(expectedCyclos, cyclosOfMethods);
 	}
 	
