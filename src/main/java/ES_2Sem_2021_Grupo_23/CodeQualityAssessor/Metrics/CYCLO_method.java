@@ -43,8 +43,7 @@ public class CYCLO_method {
 			ClassVisitor coi = new ClassVisitor();
 			coi.visit(cu, classes);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		return classes;
 	}
@@ -95,10 +94,11 @@ public class CYCLO_method {
 			List<MethodDeclaration> lmd = coid.getMethods();
 			List<ConstructorDeclaration> lcd = coid.getConstructors();
 			for(ConstructorDeclaration x : lcd) {
-				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),x.getNameAsString(), getConstructorSize(x)));
+				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),x.getDeclarationAsString(false, false, false), getConstructorSize(x)));
 			}
 			for(MethodDeclaration x : lmd) {
-				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),x.getNameAsString(), getMethodSize(x)));
+				String md = x.getDeclarationAsString(false, false, false);
+				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(), md.substring(md.indexOf(" ")+1 ,md.length()), getMethodSize(x)));
 			}
 		}
 	}
