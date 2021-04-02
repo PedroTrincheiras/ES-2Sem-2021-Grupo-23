@@ -1,27 +1,20 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_CLSC_With_Metrics;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.javatuples.Triplet;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,10 +26,6 @@ import java.util.stream.Stream;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.ConstructorDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.CYCLO_method;
@@ -58,8 +47,6 @@ public class Generate_CLSC_With_Metrics {
 	}
 
 	private static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
-
-		List<File> resultList = new ArrayList<File>();
 		Map<Integer, Object[]> data = new TreeMap<Integer, Object[]>();
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))) {
 			//coloca em files todos os ficheiros .java existentes no diretorio e nos seus subdiretorios
