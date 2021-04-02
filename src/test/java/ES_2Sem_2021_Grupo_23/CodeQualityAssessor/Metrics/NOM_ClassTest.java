@@ -37,7 +37,7 @@ class NOM_ClassTest {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\ParsingException.java");
 		List<Pair<String, Integer>> numberOfMethods = NOM_Class.getNOM(file);
 		List<Pair<String, Integer>> expectedNumberOfMethods = new ArrayList<Pair<String,Integer>>();
-		expectedNumberOfMethods.add(new Pair<String, Integer>("ParsingException", 6));
+		expectedNumberOfMethods.add(new Pair<String, Integer>("ParsingException", 7));
 		assertEquals(expectedNumberOfMethods, numberOfMethods);
 	}
 	

@@ -37,7 +37,7 @@ class WMC_ClassTest {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\ParsingException.java");
 		List<Pair<String, Integer>> wmc = WMC_Class.getWMC(file);
 		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String,Integer>>();
-		expectedWMC.add(new Pair<String, Integer>("ParsingException", 11));
+		expectedWMC.add(new Pair<String, Integer>("ParsingException", 13));
 		assertEquals(expectedWMC, wmc);
 	}
 	

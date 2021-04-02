@@ -35,6 +35,7 @@ class LOC_MethodTest {
 		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(String, Exception)", 3));
 		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(String)", 3));
 		expectedMethodLines.add(new Pair<String, Integer>("getMessage()", 21));
+		expectedMethodLines.add(new Pair<String, Integer>("forEachTest(String)", 5));
 		assertEquals(expectedMethodLines, methodLines);
 	}
 	
