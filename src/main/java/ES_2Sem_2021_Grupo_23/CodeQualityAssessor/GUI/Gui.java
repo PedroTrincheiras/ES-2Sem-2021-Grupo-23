@@ -84,7 +84,7 @@ public class Gui extends JFrame implements ActionListener {
 				eDirectory.setText("Open command canceled");
 			}
 		}
-		if (e.getSource() == export) {
+		if (e.getSource() == exportButton) {
 			String fromDirectory = cDirectory.getText();
 			String saveDirectory = eDirectory.getText();
 			
