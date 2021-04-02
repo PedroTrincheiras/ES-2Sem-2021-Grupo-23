@@ -9,8 +9,6 @@ import java.util.List;
 import org.javatuples.Triplet;
 import org.junit.jupiter.api.Test;
 
-import com.github.javaparser.utils.Pair;
-
 class LOC_MethodTest {
 	
 	@Test
