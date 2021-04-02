@@ -1,8 +1,9 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_CLSC_With_Metrics.Generate_CLSC_With_Metrics;
 
 import java.awt.event.*;
 import java.io.*;
@@ -17,6 +18,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton export;
 	private JTextField eDirectory;
 	private JButton exportButton;
+	private JLabel warning;
 
 	public Gui() {
 		setTitle("Metric Exporter");
@@ -56,6 +58,10 @@ public class Gui extends JFrame implements ActionListener {
 		exportButton.setBounds(10, 195, 464, 35);
 		exportButton.setBorder(null);
 		getContentPane().add(exportButton);
+		
+		warning = new JLabel("");
+		warning.setBounds(10, 156, 464, 28);
+		getContentPane().add(warning);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -82,7 +88,14 @@ public class Gui extends JFrame implements ActionListener {
 			String fromDirectory = cDirectory.getText();
 			String saveDirectory = eDirectory.getText();
 			
-		// TODO implement function XLSX that receive fromDirectory and saveDirectory as param
+			try {
+				Generate_CLSC_With_Metrics.generateXLSX(fromDirectory, saveDirectory);
+				warning.setForeground(Color.GREEN);
+				warning.setText("Succeful Generated");
+			} catch (IOException e1) {
+				warning.setForeground(Color.RED);
+				warning.setText("Error Generating the File");
+			}
 			
 		}
 	}
