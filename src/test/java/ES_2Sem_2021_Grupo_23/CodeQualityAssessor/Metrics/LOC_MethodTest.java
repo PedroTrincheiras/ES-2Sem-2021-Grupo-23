@@ -28,15 +28,15 @@ class LOC_MethodTest {
 	@Test
 	void ParsingException() {
 		File file = new File("jasmlFiles\\\\com\\\\jasml\\\\compiler\\\\ParsingException.java");
-		List<Pair<String, Integer>> methodLines = LOC_Method.getLOC_Method(file);
-		List<Pair<String, Integer>> expectedMethodLines = new ArrayList<Pair<String,Integer>>();
-		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(int, int, int, String)", 6));
-		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(int, int, String)", 5));
-		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(int, String)", 4));
-		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(String, Exception)", 3));
-		expectedMethodLines.add(new Pair<String, Integer>("ParsingException(String)", 3));
-		expectedMethodLines.add(new Pair<String, Integer>("getMessage()", 21));
-		expectedMethodLines.add(new Pair<String, Integer>("forEachTest(String)", 5));
+		List<Triplet<String, String, Integer>> methodLines = LOC_Method.getLOC_Method(file);
+		List<Triplet<String, String, Integer>> expectedMethodLines = new ArrayList<Triplet<String, String, Integer>>();
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(int, int, int, String)", 6));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(int, int, String)", 5));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(int, String)", 4));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(String, Exception)", 3));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","ParsingException(String)", 3));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","getMessage()", 21));
+		expectedMethodLines.add(new Triplet<String, String, Integer>("ParsingException","forEachTest(String)", 5));
 		assertEquals(expectedMethodLines, methodLines);
 	}
 	
