@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.javatuples.Triplet;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,17 +39,15 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.CYCLO_method;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.LOC_Class;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.LOC_Method;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.WMC_Class;
 
 public class Generate_CLSC_With_Metrics {
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		String folder = ("C:/Users/tomas/PycharmProjects/ES-2Sem-2021-Grupo-23/jasmlFiles");
-		Map<Integer, Object[]> data = loadDirectory(folder);
-		String[] foldername = folder.split("/");
-		String name = foldername[foldername.length - 1];
-		writeXLSX(data, name);
+		generateXLSX("a","b");
 	}
 	public static void generateXLSX(String fromdirectory,String todirectory) throws IOException {
 		String folder = ("C:/Users/tomas/PycharmProjects/ES-2Sem-2021-Grupo-23/jasmlFiles");
@@ -63,28 +62,46 @@ public class Generate_CLSC_With_Metrics {
 		List<File> resultList = new ArrayList<File>();
 		Map<Integer, Object[]> data = new TreeMap<Integer, Object[]>();
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))) {
-
+			//coloca em files todos os ficheiros .java existentes no diretorio e nos seus subdiretorios
 			List<File> files = walk.map(x -> x.toFile()).filter(f -> f.getName().endsWith(".java"))
 					.collect(Collectors.toList());
 
-			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class",
-					"WMC_class", "is_God_class", "LOC_method", "CYCLO_method", "is_Long_method" });
+			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class","WMC_class", "is_God_class", "LOC_method", "CYCLO_method", "is_Long_method" });
 			int i = 1;
 			for (File f : files) {
 				String pfile = getPackage(f);
-				// falta por aqui todos os metodos
 				List<Pair<String, Integer>> linesOfClasses = LOC_Class.getLOC_Class(f);
-
 				List<Pair<String, Integer>> numberOfMethods = NOM_Class.getNOM(f);
-				List<Pair<String, Integer>> methodLines = LOC_Method.getLOC_Method(f);
-				// System.out.println(linesOfClasses);
-				// System.out.println(methodLines);
-				// System.out.println("next file!");
-				// System.out.println(numberOfMethods);
-				// System.out.println(pfile);
-				for (Pair<String, Integer> methods : methodLines) {
-					data.put(i+1,new Object[] { i, pfile, linesOfClasses.get(0).a, methods.a, numberOfMethods.get(0).b,linesOfClasses.get(0).b, "WMC_class", "is_God_class", methods.b, "CYCLO_method","is_Long_method" });
+				List<Triplet<String, String, Integer>> methodLines = LOC_Method.getLOC_Method(f);
+				List<Pair<String, Integer>> wmc = WMC_Class.getWMC(f);
+				List<Triplet<String, String, Integer>> cyclosOfMethods = CYCLO_method.getCYCLO(f);
+				int j=0;
+				for (Triplet<String, String, Integer> methods : cyclosOfMethods) {
+					data.put(i+1,new Object[] {
+							//id,check
+							i,
+							//package,check
+							pfile,
+							//class,check
+							methods.getValue0(),
+							//method,check
+							methodLines.get(j).getValue1(),
+							//NOM_class
+							getBValue(numberOfMethods,methods.getValue0()),
+							//LOC_class,check
+							linesOfClasses.get(0).b,
+							//WMC_class
+							getBValue(wmc,methods.getValue0()),
+							//is_God_class
+							"is_God_class",
+							//LOC_method,check
+							methodLines.get(0).getValue2(),
+							//CYCLO_method,check
+							methods.getValue2(),
+							//is_Long_method
+							"is_Long_method" });
 					i++;
+					j++;
 				}
 			}
 		}
@@ -92,6 +109,7 @@ public class Generate_CLSC_With_Metrics {
 		return data;
 	}
 
+	
 	private static void writeXLSX(Map<Integer, Object[]> data, String name) {
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -126,6 +144,12 @@ public class Generate_CLSC_With_Metrics {
 		}
 	}
 
+	/** devolve o nome do package a que pertence o ficheiro
+	 * 
+	 * @param f
+	 * @return string
+	 * @throws FileNotFoundException
+	 */
 	private static String getPackage(File f) throws FileNotFoundException {
 		CompilationUnit cu = StaticJavaParser.parse(f);
 		Optional<PackageDeclaration> package_name = cu.getPackageDeclaration();
@@ -133,5 +157,26 @@ public class Generate_CLSC_With_Metrics {
 			return "";
 		return package_name.get().getNameAsString();
 	}
+	
+	/**procura na lista de pares<string, intweger> a string == name e devolve o par integer
+	 * 
+	 * @param list, string
+	 * @param name
+	 * @return
+	 */
+	private static int getBValue(List<Pair<String, Integer>> list, String name){
+		int result=0;
+		for(Pair<String, Integer> a:list) {
+			if(a.a.equals(name)) {
+				result=a.b;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	
+
+	
 
 }
