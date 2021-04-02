@@ -1,4 +1,4 @@
-package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_CLSC_With_Metrics;
+package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -34,7 +34,7 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.LOC_Method;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.WMC_Class;
 
-public class Generate_CLSC_With_Metrics {
+public class Generate_XLSX_With_Metrics {
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		generateXLSX("a","b");
 	}
