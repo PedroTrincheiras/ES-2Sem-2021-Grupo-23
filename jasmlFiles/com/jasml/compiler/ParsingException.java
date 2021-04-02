@@ -49,4 +49,10 @@ public class ParsingException extends Exception {
 		
 		return buf.toString();
 	}
+	
+	public String forEachTest(String msg){
+		for (char c : msg) {
+			System.out.println(c);
+		}
+	}
 }

@@ -37,7 +37,7 @@ class LOC_ClassTest {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\ParsingException.java");
 		List<Pair<String, Integer>> linesOfClasses = LOC_Class.getLOC_Class(file);
 		List<Pair<String, Integer>> expectedNumberOfLines = new ArrayList<Pair<String,Integer>>();
-		expectedNumberOfLines.add(new Pair<String, Integer>("ParsingException", 50));
+		expectedNumberOfLines.add(new Pair<String, Integer>("ParsingException", 56));
 		assertEquals(expectedNumberOfLines, linesOfClasses);
 	}
 	
