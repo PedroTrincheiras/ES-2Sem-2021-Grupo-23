@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,15 +35,11 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.WMC_Class;
 
 public class Generate_XLSX_With_Metrics {
-	public static void main(String[] args) throws URISyntaxException, IOException {
-		generateXLSX("a","b");
-	}
 	public static void generateXLSX(String fromdirectory,String todirectory) throws IOException {
-		String folder = ("C:/Users/tomas/PycharmProjects/ES-2Sem-2021-Grupo-23/jasmlFiles");
-		Map<Integer, Object[]> data = loadDirectory(folder);
-		String[] foldername = folder.split("/");
+		Map<Integer, Object[]> data = loadDirectory(fromdirectory);		
+		String[] foldername = fromdirectory.split(Matcher.quoteReplacement(System.getProperty("file.separator")));		
 		String name = foldername[foldername.length - 1];
-		writeToFile(generateWorkbook(data),name);
+		writeToFile(generateWorkbook(data),name,todirectory);
 	}
 
 	public static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
@@ -101,7 +97,6 @@ public class Generate_XLSX_With_Metrics {
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Metrics");
-		System.out.println(data.size());
 		Set<Integer> keyset = data.keySet();
 		List<Integer> l=new ArrayList<Integer>(keyset);
 		Collections.sort(l);
@@ -121,16 +116,14 @@ public class Generate_XLSX_With_Metrics {
 		return workbook;
 	}
 	
-	private static void writeToFile(XSSFWorkbook workbook, String name) {
-		try {
+	private static void writeToFile(XSSFWorkbook workbook, String name, String todirectory) throws IOException {
+
 			// Write the workbook in file system
-			FileOutputStream out = new FileOutputStream(new File(name + "_metrics.xlsx"));
+			FileOutputStream out = new FileOutputStream(new File(todirectory+ "\\"+ name + "_metrics.xlsx"));
 			workbook.write(out);
 			workbook.close();
 			out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 	/** devolve o nome do package a que pertence o ficheiro
