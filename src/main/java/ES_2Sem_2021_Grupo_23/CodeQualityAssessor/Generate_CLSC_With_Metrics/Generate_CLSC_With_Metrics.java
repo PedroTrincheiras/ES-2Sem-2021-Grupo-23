@@ -73,11 +73,11 @@ public class Generate_CLSC_With_Metrics {
 							methods.getValue0(),
 							//method,check
 							methodLines.get(j).getValue1(),
-							//NOM_class
+							//NOM_class,check
 							getBValue(numberOfMethods,methods.getValue0()),
 							//LOC_class,check
 							linesOfClasses.get(0).b,
-							//WMC_class
+							//WMC_class,check
 							getBValue(wmc,methods.getValue0()),
 							//is_God_class
 							"is_God_class",
@@ -145,11 +145,11 @@ public class Generate_CLSC_With_Metrics {
 		return package_name.get().getNameAsString();
 	}
 	
-	/**procura na lista de pares<string, intweger> a string == name e devolve o par integer
+	/**procura na lista de pares<string, integer> a string == name e devolve o par integer
 	 * 
-	 * @param list, string
+	 * @param list
 	 * @param name
-	 * @return
+	 * @return int
 	 */
 	private static int getBValue(List<Pair<String, Integer>> list, String name){
 		int result=0;
