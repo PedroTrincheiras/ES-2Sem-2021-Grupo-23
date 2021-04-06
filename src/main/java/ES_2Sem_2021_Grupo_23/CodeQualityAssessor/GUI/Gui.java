@@ -57,9 +57,11 @@ public class Gui extends JFrame implements ActionListener {
 		exportButton.setBackground(new Color(52, 73, 94));
 		exportButton.setBounds(10, 195, 464, 35);
 		exportButton.setBorder(null);
+		exportButton.addActionListener(this);
 		getContentPane().add(exportButton);
 		
 		warning = new JLabel("");
+		warning.setHorizontalAlignment(SwingConstants.CENTER);
 		warning.setBounds(10, 156, 464, 28);
 		getContentPane().add(warning);
 	}
@@ -87,7 +89,6 @@ public class Gui extends JFrame implements ActionListener {
 		if (e.getSource() == exportButton) {
 			String fromDirectory = cDirectory.getText();
 			String saveDirectory = eDirectory.getText();
-			
 			try {
 				Generate_XLSX_With_Metrics.generateXLSX(fromDirectory, saveDirectory);
 				warning.setForeground(Color.GREEN);
