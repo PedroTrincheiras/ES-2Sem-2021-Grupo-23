@@ -3,7 +3,7 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_CLSC_With_Metrics.Generate_CLSC_With_Metrics;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 
 import java.awt.event.*;
 import java.io.*;
@@ -90,7 +90,7 @@ public class Gui extends JFrame implements ActionListener {
 			String fromDirectory = cDirectory.getText();
 			String saveDirectory = eDirectory.getText();
 			try {
-				Generate_CLSC_With_Metrics.generateXLSX(fromDirectory, saveDirectory);
+				Generate_XLSX_With_Metrics.generateXLSX(fromDirectory, saveDirectory);
 				warning.setForeground(Color.GREEN);
 				warning.setText("Succeful Generated");
 			} catch (IOException e1) {
