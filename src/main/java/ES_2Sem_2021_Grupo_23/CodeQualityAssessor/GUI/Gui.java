@@ -2,11 +2,16 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.github.javaparser.utils.Pair;
+
+import ES_2Sem_2021_Grupo23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 
 import java.awt.event.*;
 import java.io.*;
+import java.util.List;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -81,13 +86,14 @@ public class Gui extends JFrame implements ActionListener {
 		importButton = new JButton("Import");
 		importButton.setForeground(Color.WHITE);
 		importButton.setBorder(null);
+		importButton.addActionListener(this);
 		importButton.setBackground(new Color(52, 73, 94));
 		importButton.setBounds(10, 110, 464, 35);
 		Import.add(importButton);
 		
 		warning_import = new JLabel("");
 		warning_import.setHorizontalAlignment(SwingConstants.CENTER);
-		warning_import.setBounds(10, 156, 464, 28);
+		warning_import.setBounds(10, 156, 464, 125);
 		Import.add(warning_import);
 		
 		Export = new JPanel();
@@ -162,6 +168,9 @@ public class Gui extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == choose_import) {
+			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			fc.setMultiSelectionEnabled(false);
+			fc.setFileFilter(new FileNameExtensionFilter("Files ending in .xlsx", "xlsx"));
 			int option = fc.showOpenDialog(this);
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
@@ -187,16 +196,21 @@ public class Gui extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == importButton) {
-			String fromDirectory = toReadImport.getText();
-			/*
+			String fromFile = toReadImport.getText();
 			try {
-				warning_import.setForeground(Color.GREEN);
-				warning_import.setText("Successful Readed");
+				List<Pair<String,Integer>> metrics = Calculate_Resume_Metrics.readXLSX(fromFile);
+				warning_import.setForeground(new Color(52, 73, 94));
+				String info = "<html>";
+				for(Pair<String,Integer> p : metrics) {
+					info += p.a + " = " + p.b + "<br>";
+				}
+				info+="</html>";
+				warning_import.setText(info);
+						
 			} catch (IOException e1) {
 				warning_import.setForeground(Color.RED);
 				warning_import.setText("Error Reading the File");
 			}
-			*/
 		}
 		
 		
