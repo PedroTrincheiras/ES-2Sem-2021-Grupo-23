@@ -15,10 +15,11 @@ import java.util.List;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * 
- * @author Pedro Trincheiras
+ * @author Pedro Trincheiras and Bernardo Várzea
  *
  */
 
@@ -38,9 +39,20 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton importButton;
 	private JLabel warning_import;
 	
+	private JPanel Rules;
+	private JTextField rule_input;
+	private JButton setRuleButton;
+	private JTextField rule_name;
+	private JLabel operatorsLabel;
+	private JLabel exampleRuleLabel;
+	private JLabel ruleNameLabel;
+	private JLabel ruleLabel;
+	
 	private JButton ExportPageButton;
 	private JButton ImportPageButton;
-
+	private JButton RulesPageButton;
+	
+	
 	public Gui() {
 		
 		JPanel Menu = new JPanel();
@@ -65,6 +77,14 @@ public class Gui extends JFrame implements ActionListener {
 		ImportPageButton.setBorder(null);
 		Menu.add(ImportPageButton);
 		
+		RulesPageButton = new JButton("Rules");
+		RulesPageButton.setForeground(Color.WHITE);
+		RulesPageButton.setBorder(null);
+		RulesPageButton.setBackground(new Color(52, 73, 94));
+		RulesPageButton.setBounds(160, 0, 65, 36);
+		RulesPageButton.addActionListener(this);
+		Menu.add(RulesPageButton);
+		
 		setTitle("Metric Exporter");
 		getContentPane().setLayout(null);
 		
@@ -73,6 +93,54 @@ public class Gui extends JFrame implements ActionListener {
 		Import.setBackground(Color.WHITE);
 		Import.setBounds(0, 0, 484, 461);
 		Import.setVisible(false);
+		
+		Rules = new JPanel();
+		Rules.setBackground(Color.WHITE);
+		Rules.setBounds(0, 0, 484, 461);
+		getContentPane().add(Rules);
+		Rules.setLayout(null);
+		Rules.setVisible(false);
+		
+		rule_input = new JTextField();
+		rule_input.setBorder(new LineBorder(new Color(189, 195, 199)));
+		rule_input.setBackground(Color.WHITE);
+		rule_input.setBounds(10, 258, 464, 35);
+		Rules.add(rule_input);
+		
+		operatorsLabel = new JLabel("Use &&(and) ||(or)");
+		operatorsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		operatorsLabel.setBounds(155, 104, 130, 24);
+		Rules.add(operatorsLabel);
+		
+		setRuleButton = new JButton("Set Rule");
+		setRuleButton.setForeground(Color.WHITE);
+		setRuleButton.setBorder(null);
+		setRuleButton.setBackground(new Color(52, 73, 94));
+		setRuleButton.setBounds(141, 324, 186, 35);
+		setRuleButton.addActionListener(this);
+		Rules.add(setRuleButton);
+		
+		rule_name = new JTextField();
+		rule_name.setToolTipText("");
+		rule_name.setBorder(new LineBorder(new Color(189, 195, 199)));
+		rule_name.setBackground(Color.WHITE);
+		rule_name.setBounds(10, 190, 464, 35);
+		Rules.add(rule_name);
+		
+		exampleRuleLabel = new JLabel("Example : loc_method>5 && loc_class>10");
+		exampleRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		exampleRuleLabel.setBounds(97, 131, 284, 24);
+		Rules.add(exampleRuleLabel);
+		
+		ruleNameLabel = new JLabel("Rule Name");
+		ruleNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		ruleNameLabel.setBounds(10, 166, 64, 24);
+		Rules.add(ruleNameLabel);
+		
+		ruleLabel = new JLabel("Rule");
+		ruleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		ruleLabel.setBounds(10, 233, 64, 24);
+		Rules.add(ruleLabel);
 		getContentPane().add(Import);
 		
 		choose_import = new JButton("Select Directory");
@@ -219,18 +287,37 @@ public class Gui extends JFrame implements ActionListener {
 			}
 		}
 		
+		if (e.getSource() == setRuleButton) {
+			String rname = rule_name.getText();
+			String rule = rule_input.getText();
+			System.out.println(rname + " " + rule);
+		}
+		
 		
 		if (e.getSource() == ExportPageButton) {
 			Import.setVisible(false);
 			Export.setVisible(true);
+			Rules.setVisible(false);
 			ExportPageButton.setBackground(new Color(100, 120, 140));
 			ImportPageButton.setBackground(new Color(52, 73, 94));
+			RulesPageButton.setBackground(new Color(52, 73, 94));
 		}
 		if(e.getSource()==ImportPageButton) {
 			Export.setVisible(false);
 			Import.setVisible(true);
+			Rules.setVisible(false);
 			ImportPageButton.setBackground(new Color(100, 120, 140));
 			ExportPageButton.setBackground(new Color(52, 73, 94));
+			RulesPageButton.setBackground(new Color(52, 73, 94));
+		}
+		
+		if(e.getSource()==RulesPageButton) {
+			Export.setVisible(false);
+			Import.setVisible(false);
+			Rules.setVisible(true);
+			ImportPageButton.setBackground(new Color(52, 73, 94));
+			ExportPageButton.setBackground(new Color(52, 73, 94));
+			RulesPageButton.setBackground(new Color(100, 120, 140));
 		}
 	}
 	
