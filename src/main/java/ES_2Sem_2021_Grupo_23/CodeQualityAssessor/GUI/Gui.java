@@ -16,6 +16,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
 
+/**
+ * 
+ * @author Pedro Trincheiras
+ *
+ */
+
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7448241899663378705L;
 	private JButton choose;
