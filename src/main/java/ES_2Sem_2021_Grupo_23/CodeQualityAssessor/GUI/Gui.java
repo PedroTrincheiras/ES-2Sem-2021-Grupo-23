@@ -18,14 +18,15 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton export;
 	private JTextField eDirectory;
 	private JButton exportButton;
-	private JLabel warning;
+	private JLabel warning_export;
 	private JPanel Export;
 	
 	private JPanel Import;
-	private JButton choose_1;
-	private JTextField textField;
-	private JButton exportButton_1;
-	private JLabel warning_1;
+	private JButton choose_import;
+	private JTextField toReadImport;
+	private JButton importButton;
+	private JLabel warning_import;
+	
 	private JButton ExportPageButton;
 	private JButton ImportPageButton;
 
@@ -55,6 +56,39 @@ public class Gui extends JFrame implements ActionListener {
 		
 		setTitle("Metric Exporter");
 		getContentPane().setLayout(null);
+		
+		Import = new JPanel();
+		Import.setLayout(null);
+		Import.setBackground(Color.WHITE);
+		Import.setBounds(0, 0, 484, 461);
+		Import.setVisible(false);
+		getContentPane().add(Import);
+		
+		choose_import = new JButton("Select Directory");
+		choose_import.setForeground(Color.WHITE);
+		choose_import.setBorder(null);
+		choose_import.addActionListener(this);
+		choose_import.setBackground(new Color(52, 73, 94));
+		choose_import.setBounds(324, 64, 150, 35);
+		Import.add(choose_import);
+		
+		toReadImport = new JTextField();
+		toReadImport.setBorder(new LineBorder(new Color(189, 195, 199)));
+		toReadImport.setBackground(Color.WHITE);
+		toReadImport.setBounds(10, 64, 304, 35);
+		Import.add(toReadImport);
+		
+		importButton = new JButton("Import");
+		importButton.setForeground(Color.WHITE);
+		importButton.setBorder(null);
+		importButton.setBackground(new Color(52, 73, 94));
+		importButton.setBounds(10, 110, 464, 35);
+		Import.add(importButton);
+		
+		warning_import = new JLabel("");
+		warning_import.setHorizontalAlignment(SwingConstants.CENTER);
+		warning_import.setBounds(10, 156, 464, 28);
+		Import.add(warning_import);
 		
 		Export = new JPanel();
 		Export.setBounds(0, 0, 484, 461);
@@ -96,44 +130,12 @@ public class Gui extends JFrame implements ActionListener {
 		exportButton.addActionListener(this);
 		Export.add(exportButton);
 		
-		warning = new JLabel("");
-		warning.setHorizontalAlignment(SwingConstants.CENTER);
-		warning.setBounds(10, 240, 464, 28);
-		Export.add(warning);
+		warning_export = new JLabel("");
+		warning_export.setHorizontalAlignment(SwingConstants.CENTER);
+		warning_export.setBounds(10, 240, 464, 28);
+		Export.add(warning_export);
 		
 		getContentPane().add(Export);
-		
-		Import = new JPanel();
-		Import.setLayout(null);
-		Import.setBackground(Color.WHITE);
-		Import.setBounds(0, 0, 484, 461);
-		Import.setVisible(false);
-		getContentPane().add(Import);
-		
-		choose_1 = new JButton("Select Directory");
-		choose_1.setForeground(Color.WHITE);
-		choose_1.setBorder(null);
-		choose_1.setBackground(new Color(52, 73, 94));
-		choose_1.setBounds(324, 64, 150, 35);
-		Import.add(choose_1);
-		
-		textField = new JTextField();
-		textField.setBorder(new LineBorder(new Color(189, 195, 199)));
-		textField.setBackground(Color.WHITE);
-		textField.setBounds(10, 64, 304, 35);
-		Import.add(textField);
-		
-		exportButton_1 = new JButton("Import");
-		exportButton_1.setForeground(Color.WHITE);
-		exportButton_1.setBorder(null);
-		exportButton_1.setBackground(new Color(52, 73, 94));
-		exportButton_1.setBounds(10, 110, 464, 35);
-		Import.add(exportButton_1);
-		
-		warning_1 = new JLabel("");
-		warning_1.setHorizontalAlignment(SwingConstants.CENTER);
-		warning_1.setBounds(10, 156, 464, 28);
-		Import.add(warning_1);
 		
 		
 	}
@@ -158,19 +160,45 @@ public class Gui extends JFrame implements ActionListener {
 				eDirectory.setText("Open command canceled");
 			}
 		}
+		
+		if (e.getSource() == choose_import) {
+			int option = fc.showOpenDialog(this);
+			if (option == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				toReadImport.setText(file.getPath());
+			} else {
+				toReadImport.setText("Open command canceled");
+			}
+		}
+		
+		
 		if (e.getSource() == exportButton) {
 			String fromDirectory = cDirectory.getText();
 			String saveDirectory = eDirectory.getText();
 			try {
 				Generate_XLSX_With_Metrics.generateXLSX(fromDirectory, saveDirectory);
-				warning.setForeground(Color.GREEN);
-				warning.setText("Succeful Generated");
+				warning_export.setForeground(Color.GREEN);
+				warning_export.setText("Successful Generated");
 			} catch (IOException e1) {
-				warning.setForeground(Color.RED);
-				warning.setText("Error Generating the File");
+				warning_export.setForeground(Color.RED);
+				warning_export.setText("Error Generating the File");
 			}
 			
 		}
+		
+		if (e.getSource() == importButton) {
+			String fromDirectory = toReadImport.getText();
+			/*
+			try {
+				warning_import.setForeground(Color.GREEN);
+				warning_import.setText("Successful Readed");
+			} catch (IOException e1) {
+				warning_import.setForeground(Color.RED);
+				warning_import.setText("Error Reading the File");
+			}
+			*/
+		}
+		
 		
 		if (e.getSource() == ExportPageButton) {
 			Import.setVisible(false);
