@@ -10,10 +10,24 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
 
+/**
+ * 
+ * @author diogo mano
+ *
+ */
+
 public class Calculate_Resume_Metrics {
+	
+	/**
+	 * Receives a string(name of the xlsx file) and read cell
+	 * 
+	 * @param string - 
+	 * @return 
+	 */
 	
 	public static List<Pair<String,Integer>> readXLSX(String fromDirectory) throws IOException {
 		List<String> classes = new ArrayList<String>();
+		List<String> countLinesClasses = new ArrayList<String>();
 		List<String> packages = new ArrayList<String>();
 		List<String> methods = new ArrayList<String>();
 		List<Pair<String,Integer>> metricsCalculate = new ArrayList<Pair<String,Integer>>();
@@ -32,7 +46,8 @@ public class Calculate_Resume_Metrics {
 					if(j==3 && !methods.contains(s)) {
 						methods.add(s);
 					}
-					if(j==5 && !classes.contains(workbook.getSheet("Metrics").getRow(i).getCell(2).toString()))
+					if(j==5 && !countLinesClasses.contains(workbook.getSheet("Metrics").getRow(i).getCell(2).toString()))
+						countLinesClasses.add(workbook.getSheet("Metrics").getRow(i).getCell(2).toString());
 						numberOfLines += Integer.parseInt(s); 
 				}
 			}
