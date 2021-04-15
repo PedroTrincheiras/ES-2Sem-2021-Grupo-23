@@ -47,6 +47,8 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel exampleRuleLabel;
 	private JLabel ruleNameLabel;
 	private JLabel ruleLabel;
+	private JComboBox rule_list;
+	private JLabel changeRuleLabel;
 	
 	private JButton ExportPageButton;
 	private JButton ImportPageButton;
@@ -109,7 +111,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		operatorsLabel = new JLabel("Use &&(and) ||(or)");
 		operatorsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		operatorsLabel.setBounds(155, 104, 130, 24);
+		operatorsLabel.setBounds(154, 55, 130, 24);
 		Rules.add(operatorsLabel);
 		
 		setRuleButton = new JButton("Set Rule");
@@ -129,7 +131,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		exampleRuleLabel = new JLabel("Example : loc_method>5 && loc_class>10");
 		exampleRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		exampleRuleLabel.setBounds(97, 131, 284, 24);
+		exampleRuleLabel.setBounds(97, 83, 284, 24);
 		Rules.add(exampleRuleLabel);
 		
 		ruleNameLabel = new JLabel("Rule Name");
@@ -141,6 +143,17 @@ public class Gui extends JFrame implements ActionListener {
 		ruleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		ruleLabel.setBounds(10, 233, 64, 24);
 		Rules.add(ruleLabel);
+		
+		rule_list = new JComboBox();
+		rule_list.setBounds(10, 133, 141, 22);
+		rule_list.addActionListener(this);
+		Rules.add(rule_list);
+		
+		changeRuleLabel = new JLabel("Change Rule");
+		changeRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		changeRuleLabel.setBounds(10, 108, 64, 24);
+		Rules.add(changeRuleLabel);
+		
 		getContentPane().add(Import);
 		
 		choose_import = new JButton("Select Directory");
@@ -291,8 +304,12 @@ public class Gui extends JFrame implements ActionListener {
 			String rname = rule_name.getText();
 			String rule = rule_input.getText();
 			System.out.println(rname + " " + rule);
+			//refresh rule_list
 		}
 		
+		if (e.getSource() == rule_list) {
+			//display rule
+		}
 		
 		if (e.getSource() == ExportPageButton) {
 			Import.setVisible(false);
