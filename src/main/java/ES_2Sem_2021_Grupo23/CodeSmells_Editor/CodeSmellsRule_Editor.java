@@ -6,7 +6,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class Main {
+public class CodeSmellsRule_Editor {
 
 	public static String rule_Evaluator(String rule, int LOC_method, int CYCLO_method, int LOC_class, int NOM_class,
 			int WMC_class) throws ScriptException {
