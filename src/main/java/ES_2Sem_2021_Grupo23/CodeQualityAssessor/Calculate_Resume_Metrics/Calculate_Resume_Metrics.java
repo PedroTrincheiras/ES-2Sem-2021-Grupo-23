@@ -19,10 +19,12 @@ import com.github.javaparser.utils.Pair;
 public class Calculate_Resume_Metrics {
 	
 	/**
-	 * Receives a string(name of the xlsx file) and read cell
+	 * Receives a string (name of the xlsx file), read cell by cell and calculate number of classes,
+	 *	number of packages, number of methods, number of lines  
 	 * 
-	 * @param string - 
-	 * @return 
+	 * @param string - to calculate number of classes, number of packages, number of methods, number of lines
+	 * @return a list with a string and integer of number of classes, number of packages, 
+	 * number of methods, number of lines
 	 */
 	
 	public static List<Pair<String,Integer>> readXLSX(String fromDirectory) throws IOException {

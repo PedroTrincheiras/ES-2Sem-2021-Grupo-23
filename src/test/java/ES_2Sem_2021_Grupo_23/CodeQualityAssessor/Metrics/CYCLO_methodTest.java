@@ -1,6 +1,7 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
@@ -9,8 +10,6 @@ import java.util.List;
 
 import org.javatuples.Triplet;
 import org.junit.jupiter.api.Test;
-
-import com.github.javaparser.utils.Pair;
 
 class CYCLO_methodTest {
 	
@@ -84,7 +83,7 @@ class CYCLO_methodTest {
 	@Test
 	void Undefined() {
 		File file = new File("Undefined");
-		List<Pair<String, Integer>> expectedCyclos = NOM_Class.getNOM(file);
+		List<Triplet<String, String, Integer>> expectedCyclos = CYCLO_method.getCYCLO(file);
 		assertNull(expectedCyclos);
 	}
 
