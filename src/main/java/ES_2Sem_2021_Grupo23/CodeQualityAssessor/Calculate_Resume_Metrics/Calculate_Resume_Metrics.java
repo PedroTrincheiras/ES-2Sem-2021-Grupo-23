@@ -48,7 +48,7 @@ public class Calculate_Resume_Metrics {
 					}
 					if(j==5 && !countLinesClasses.contains(workbook.getSheet("Metrics").getRow(i).getCell(2).toString())) {
 						countLinesClasses.add(workbook.getSheet("Metrics").getRow(i).getCell(2).toString());
-						numberOfLines += Integer.parseInt(s); 
+						numberOfLines += Double.parseDouble(s); 
 					}
 				}
 			}
