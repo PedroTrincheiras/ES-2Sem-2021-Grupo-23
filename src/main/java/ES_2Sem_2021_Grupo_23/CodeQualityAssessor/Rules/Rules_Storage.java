@@ -23,12 +23,22 @@ public class Rules_Storage {
 		return this.rules.get(ruleName);
 	}
 	
-	private void changeRuleName(String oldRuleName, String newRuleName) {
+	public boolean addRule(String ruleName, String rule) {
+		for (String name : this.rules.keySet()) {
+			if(name.equals(ruleName)) {
+				return false;
+			}
+		}
+		this.rules.put(ruleName, rule);
+		return true;
+	}
+	
+	public void changeRuleName(String oldRuleName, String newRuleName) {
 		this.rules.put(newRuleName, this.rules.get(oldRuleName));
 		this.rules.remove(oldRuleName);
 	}
 	
-	private void changeRule(String ruleName, String newRule) {
+	public void changeRule(String ruleName, String newRule) {
 		this.rules.put(ruleName, newRule);
 	}
 	
