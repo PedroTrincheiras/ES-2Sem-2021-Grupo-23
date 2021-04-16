@@ -15,12 +15,8 @@ public class Rules_Storage {
 		// TODO 
 	}
 	
-	public List<String> getRulesNames() {
-		List<String> out = new ArrayList<String>();
-		for (String ruleName : this.rules.keySet()) {
-			out.add(ruleName);
-		}
-		return out;
+	public Set<String> getRulesNames() {
+		return this.rules.keySet();
 	}
 	
 	public String getRule(String ruleName) {
