@@ -1,6 +1,10 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class Rules_Storage {
@@ -8,19 +12,16 @@ public class Rules_Storage {
 	private HashMap<String, String> rules;
 	
 	/**
-	 * Create a new Rule_Storage without any parameter
+	 * Try to load the rules binary object stored in rules.dat file if can't load create a new Rule_Storage
 	 */
 	public Rules_Storage() {
-		rules = new HashMap<String, String>();
+		try {
+			rules = loadDatabase();
+		}catch (Exception e){
+			rules = new HashMap<String, String>();
+		}		
 	}
-	
-	/**
-	 * Create a new Rule Storage
-	 * @param file - to create a new Rule_Storage with the existing rules in the file
-	 */
-	public Rules_Storage(File file) {
-		// TODO 
-	}
+
 	
 	/**
 	 * Give all rule names
@@ -77,6 +78,36 @@ public class Rules_Storage {
 	 */
 	public void changeRule(String ruleName, String newRule) {
 		this.rules.put(ruleName, newRule);
+	}
+	
+	/**
+	 * Save the current database
+	 * @throws Exception 
+	 */
+	public void saveCurrentDatabase() throws Exception {
+		try {
+		FileOutputStream fos = new FileOutputStream("rules.dat");
+	    ObjectOutputStream oos = new ObjectOutputStream(fos);
+	    oos.writeObject(rules);
+	    oos.close();
+		}catch (Exception e) {
+			throw new Exception("Error saving file");
+		}
+	}
+	
+	/**
+	 * Load Database
+	 * 
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 */
+	public HashMap<String, String> loadDatabase() throws ClassNotFoundException, IOException{
+		FileInputStream fis = new FileInputStream("rules.dat"); 
+		try (ObjectInputStream ois = new ObjectInputStream(fis)) {
+			@SuppressWarnings("unchecked")
+			HashMap<String, String> readObject = (HashMap<String, String>) ois.readObject();
+			return readObject;
+		}			
 	}
 	
 	
