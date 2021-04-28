@@ -58,11 +58,23 @@ public class Rules_Storage {
 		return true;
 	}
 	
+	/**
+	 * Change a rule name that already exists
+	 * 
+	 * @param String - to get the rule
+	 * @param String - to add as the new key
+	 */
 	public void changeRuleName(String oldRuleName, String newRuleName) {
 		this.rules.put(newRuleName, this.rules.get(oldRuleName));
 		this.rules.remove(oldRuleName);
 	}
 	
+	/**
+	 * Change a rule that already exists
+	 * 
+	 * @param String - to get the rule
+	 * @param String - to update as the new rule
+	 */
 	public void changeRule(String ruleName, String newRule) {
 		this.rules.put(ruleName, newRule);
 	}
