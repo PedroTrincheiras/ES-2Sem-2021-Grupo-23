@@ -58,6 +58,8 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton RulesPageButton;
 	
 	private Rules_Storage rules;
+	private String crname;
+	private String crule;
 
 	public Gui() {
 
@@ -314,7 +316,14 @@ public class Gui extends JFrame implements ActionListener {
 			String rule = rule_input.getText();
 			if (!rname.equals("") && !rule.equals("")) {
 				if (change_rule) {
-					rules.changeRule(rname, rule);
+					if(!rname.equals(crname)) {
+						rules.changeRuleName(crname, rname);
+					} if(!rule.equals(crule)) {
+						rules.changeRule(rname, rule);
+					}
+					for (String r : rules.getRulesNames()) {
+						System.out.println(r);
+					}
 					change_rule = false;
 					ruleStatusLabel.setText("Successful");
 					ruleStatusLabel.setForeground(Color.green);
@@ -336,8 +345,10 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == rule_list) {
 			if (rule_list.getSelectedItem() != null) {
-				rule_name.setText(rule_list.getSelectedItem().toString());
-				rule_input.setText(rules.getRule(rule_list.getSelectedItem().toString()));
+				crname = rule_list.getSelectedItem().toString();
+				crule = rules.getRule(crname);
+				rule_name.setText(crname);
+				rule_input.setText(crule);
 				change_rule = true;
 			}
 		}
