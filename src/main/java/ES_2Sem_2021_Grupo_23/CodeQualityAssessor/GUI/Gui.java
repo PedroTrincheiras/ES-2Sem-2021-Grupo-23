@@ -58,12 +58,12 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton RulesPageButton;
 	
 	private Rules_Storage rules;
+	private String crname;
+	private String crule;
 
 	public Gui() {
-
-		// change to file sprint3
+		
 		rules = new Rules_Storage();
-		rules.addRule("loc", "x>5 && y>2");
 
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(255, 255, 255));
@@ -162,6 +162,7 @@ public class Gui extends JFrame implements ActionListener {
 		Rules.add(changeRuleLabel);
 		
 		ruleStatusLabel = new JLabel("");
+		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ruleStatusLabel.setBounds(140, 304, 186, 24);
 		Rules.add(ruleStatusLabel);
 
@@ -314,7 +315,11 @@ public class Gui extends JFrame implements ActionListener {
 			String rule = rule_input.getText();
 			if (!rname.equals("") && !rule.equals("")) {
 				if (change_rule) {
-					rules.changeRule(rname, rule);
+					if(!rname.equals(crname)) {
+						rules.changeRuleName(crname, rname);
+					} if(!rule.equals(crule)) {
+						rules.changeRule(rname, rule);
+					}
 					change_rule = false;
 					ruleStatusLabel.setText("Successful");
 					ruleStatusLabel.setForeground(Color.green);
@@ -331,13 +336,21 @@ public class Gui extends JFrame implements ActionListener {
 				rule_name.setText("");
 				rule_input.setText("");
 				refreshRuleList();
+				try {
+					rules.saveCurrentDatabase();
+				} catch (Exception e1) {
+					ruleStatusLabel.setText("Save Error");
+					ruleStatusLabel.setForeground(Color.red);
+				}
 			}
 		}
 
 		if (e.getSource() == rule_list) {
 			if (rule_list.getSelectedItem() != null) {
-				rule_name.setText(rule_list.getSelectedItem().toString());
-				rule_input.setText(rules.getRule(rule_list.getSelectedItem().toString()));
+				crname = rule_list.getSelectedItem().toString();
+				crule = rules.getRule(crname);
+				rule_name.setText(crname);
+				rule_input.setText(crule);
 				change_rule = true;
 			}
 		}
