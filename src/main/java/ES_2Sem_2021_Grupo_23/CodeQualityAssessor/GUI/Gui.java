@@ -320,9 +320,6 @@ public class Gui extends JFrame implements ActionListener {
 					} if(!rule.equals(crule)) {
 						rules.changeRule(rname, rule);
 					}
-					for (String r : rules.getRulesNames()) {
-						System.out.println(r);
-					}
 					change_rule = false;
 					ruleStatusLabel.setText("Successful");
 					ruleStatusLabel.setForeground(Color.green);
