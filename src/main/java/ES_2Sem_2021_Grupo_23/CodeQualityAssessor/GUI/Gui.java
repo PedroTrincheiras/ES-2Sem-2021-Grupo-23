@@ -62,10 +62,8 @@ public class Gui extends JFrame implements ActionListener {
 	private String crule;
 
 	public Gui() {
-
-		// change to file sprint3
+		
 		rules = new Rules_Storage();
-		rules.addRule("loc", "x>5 && y>2");
 
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(255, 255, 255));
@@ -164,6 +162,7 @@ public class Gui extends JFrame implements ActionListener {
 		Rules.add(changeRuleLabel);
 		
 		ruleStatusLabel = new JLabel("");
+		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ruleStatusLabel.setBounds(140, 304, 186, 24);
 		Rules.add(ruleStatusLabel);
 
@@ -340,6 +339,12 @@ public class Gui extends JFrame implements ActionListener {
 				rule_name.setText("");
 				rule_input.setText("");
 				refreshRuleList();
+				try {
+					rules.saveCurrentDatabase();
+				} catch (Exception e1) {
+					ruleStatusLabel.setText("Save Error");
+					ruleStatusLabel.setForeground(Color.red);
+				}
 			}
 		}
 
