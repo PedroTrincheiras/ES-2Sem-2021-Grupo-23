@@ -30,7 +30,8 @@ public class CodeSmell_Editor {
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
 			throws IOException, ScriptException {
 		List<Pair<String, Boolean>> list = new ArrayList<Pair<String, Boolean>>();
-		ruleName = rule.toLowerCase();
+		
+		ruleName = ruleName.toLowerCase();
 
 		FileInputStream f = new FileInputStream(new File(fromDirectory));
 		try (XSSFWorkbook workbook = new XSSFWorkbook(f)) {
