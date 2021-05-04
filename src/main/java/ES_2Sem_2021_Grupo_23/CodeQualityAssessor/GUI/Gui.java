@@ -12,15 +12,17 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
 
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 /**
  * 
- * @author Pedro Trincheiras and Bernardo Várzea
+ * @author Pedro Trincheiras and Bernardo Várzea and Filipe Barroso
  *
  */
 
@@ -52,18 +54,75 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel changeRuleLabel;
 	private boolean change_rule;
 	private JLabel ruleStatusLabel;
+	private JLabel CSRestultsLabel;
+	
+	private JPanel CSResults;
 
 	private JButton ExportPageButton;
 	private JButton ImportPageButton;
 	private JButton RulesPageButton;
+	private JButton CSResultsPageButton;
 	
 	private Rules_Storage rules;
 	private String crname;
 	private String crule;
+	private JTextField fileDirectory;
+	private JButton directoryButton;
+	private DefaultListModel<String> l1; 
+    private JList<String> codeSmellsList;
+    private JButton showResults;
+    private JTextPane results;
 
 	public Gui() {
 		
 		rules = new Rules_Storage();
+		
+		CSResults = new JPanel();
+		CSResults.setBackground(Color.WHITE);
+		CSResults.setBounds(0, 0, 484, 461);
+		getContentPane().add(CSResults);
+		CSResults.setLayout(null);
+		CSResults.setVisible(false);
+		
+		CSRestultsLabel = new JLabel("Code Smells Results");
+		CSRestultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		CSRestultsLabel.setBounds(171, 60, 142, 24);
+		CSResults.add(CSRestultsLabel);
+		
+		directoryButton = new JButton("Select Directory");
+		directoryButton.setForeground(Color.WHITE);
+		directoryButton.setBorder(null);
+		directoryButton.addActionListener(this);
+		directoryButton.setBackground(new Color(52, 73, 94));
+		directoryButton.setBounds(324, 110, 150, 35);
+		CSResults.add(directoryButton);
+		
+		fileDirectory = new JTextField();
+		fileDirectory.setBorder(new LineBorder(new Color(189, 195, 199)));
+		fileDirectory.setBackground(Color.WHITE);
+		fileDirectory.setBounds(10, 110, 304, 35);
+		CSResults.add(fileDirectory);
+		
+		showResults = new JButton("Results");
+		showResults.setForeground(Color.WHITE);
+		showResults.setBorder(null);
+		showResults.setBackground(new Color(52, 73, 94));
+		showResults.setBounds(10, 385, 234, 35);
+		CSResults.add(showResults);
+		
+		JLabel lblNewLabel = new JLabel("Code Smells");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(45, 168, 106, 24);
+		CSResults.add(lblNewLabel);
+		
+		l1 = new DefaultListModel<>(); 
+        codeSmellsList = new JList<>(l1);
+		codeSmellsList.setBounds(26, 213, 122, 142);
+		CSResults.add(codeSmellsList);
+		
+		results = new JTextPane();
+		results.setBounds(254, 182, 205, 238);
+		CSResults.add(results);
 
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(255, 255, 255));
@@ -94,6 +153,14 @@ public class Gui extends JFrame implements ActionListener {
 		RulesPageButton.setBounds(160, 0, 65, 36);
 		RulesPageButton.addActionListener(this);
 		Menu.add(RulesPageButton);
+		
+		CSResultsPageButton = new JButton("Results");
+		CSResultsPageButton.setForeground(Color.WHITE);
+		CSResultsPageButton.setBorder(null);
+		CSResultsPageButton.setBackground(new Color(52, 73, 94));
+		CSResultsPageButton.setBounds(235, 0, 65, 36);
+		CSResultsPageButton.addActionListener(this);
+		Menu.add(CSResultsPageButton);
 
 		setTitle("Metric Exporter");
 		getContentPane().setLayout(null);
@@ -277,6 +344,19 @@ public class Gui extends JFrame implements ActionListener {
 				toReadImport.setText("Open command canceled");
 			}
 		}
+		
+		if (e.getSource() == directoryButton) {
+			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			fc.setMultiSelectionEnabled(false);
+			fc.setFileFilter(new FileNameExtensionFilter("Files ending in .xlsx", "xlsx"));
+			int option = fc.showOpenDialog(this);
+			if (option == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				fileDirectory.setText(file.getPath());
+			} else {
+				fileDirectory.setText("Open command canceled");
+			}
+		}
 
 		if (e.getSource() == exportButton) {
 			String fromDirectory = cDirectory.getText();
@@ -290,6 +370,11 @@ public class Gui extends JFrame implements ActionListener {
 				warning_export.setText("Error Generating the File");
 			}
 
+		}
+		
+		if (e.getSource() == showResults) {
+			results.setText("oi");
+			
 		}
 
 		if (e.getSource() == importButton) {
@@ -359,28 +444,50 @@ public class Gui extends JFrame implements ActionListener {
 			Import.setVisible(false);
 			Export.setVisible(true);
 			Rules.setVisible(false);
+			CSResults.setVisible(false);
 			ExportPageButton.setBackground(new Color(100, 120, 140));
 			ImportPageButton.setBackground(new Color(52, 73, 94));
 			RulesPageButton.setBackground(new Color(52, 73, 94));
+			CSResultsPageButton.setBackground(new Color(52, 73, 94));
 		}
 		if (e.getSource() == ImportPageButton) {
 			Export.setVisible(false);
 			Import.setVisible(true);
 			Rules.setVisible(false);
+			CSResults.setVisible(false);
 			ImportPageButton.setBackground(new Color(100, 120, 140));
 			ExportPageButton.setBackground(new Color(52, 73, 94));
 			RulesPageButton.setBackground(new Color(52, 73, 94));
+			CSResultsPageButton.setBackground(new Color(52, 73, 94));
 		}
 
 		if (e.getSource() == RulesPageButton) {
 			Export.setVisible(false);
 			Import.setVisible(false);
 			Rules.setVisible(true);
+			CSResults.setVisible(false);
 			ImportPageButton.setBackground(new Color(52, 73, 94));
 			ExportPageButton.setBackground(new Color(52, 73, 94));
 			RulesPageButton.setBackground(new Color(100, 120, 140));
+			CSResultsPageButton.setBackground(new Color(52, 73, 94));
 			refreshRuleList();
 		}
+		if (e.getSource() == CSResultsPageButton) {
+			Export.setVisible(false);
+			Import.setVisible(false);
+			Rules.setVisible(false);
+			CSResults.setVisible(true);
+			ImportPageButton.setBackground(new Color(52, 73, 94));
+			ExportPageButton.setBackground(new Color(52, 73, 94));
+			RulesPageButton.setBackground(new Color(52, 73, 94));
+			CSResultsPageButton.setBackground(new Color(100, 120, 140));
+			refreshCodeSmellsList();
+		}
+	}
+	
+	private void refreshCodeSmellsList() {
+		l1.removeAllElements();
+		rules.getRulesNames().forEach(x -> l1.addElement(x));
 	}
 	
 	private void refreshRuleList() {
@@ -402,5 +509,22 @@ public class Gui extends JFrame implements ActionListener {
 		gui.setLocation(x, y);
 		gui.setVisible(true);
 		gui.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
