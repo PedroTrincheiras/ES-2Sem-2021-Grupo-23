@@ -49,7 +49,7 @@ public class Generate_XLSX_With_Metrics {
 			List<File> files = walk.map(x -> x.toFile()).filter(f -> f.getName().endsWith(".java"))
 					.collect(Collectors.toList());
 
-			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class","WMC_class", "is_God_class", "LOC_method", "CYCLO_method", "is_Long_method" });
+			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class","WMC_class", "LOC_method", "CYCLO_method" });
 			int i = 1;
 			for (File f : files) {
 				String pfile = getPackage(f);
@@ -75,14 +75,10 @@ public class Generate_XLSX_With_Metrics {
 							linesOfClasses.get(0).b,
 							//WMC_class,check
 							getBValue(wmc,methods.getValue0()),
-							//is_God_class
-							"is_God_class",
 							//LOC_method,check
 							methodLines.get(0).getValue2(),
 							//CYCLO_method,check
-							methods.getValue2(),
-							//is_Long_method
-							"is_Long_method" });
+							methods.getValue2()});
 					i++;
 					j++;
 				}
