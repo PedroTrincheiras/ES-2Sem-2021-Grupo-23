@@ -71,58 +71,22 @@ public class Gui extends JFrame implements ActionListener {
 	private DefaultListModel<String> l1; 
     private JList<String> codeSmellsList;
     private JButton showResults;
-    private JTextPane results;
+    private JTable results;
+    private List<String> columnNames;
+    private List<List<String>> rows;
 
 	public Gui() {
 		
 		rules = new Rules_Storage();
 		
-		CSResults = new JPanel();
-		CSResults.setBackground(Color.WHITE);
-		CSResults.setBounds(0, 0, 484, 461);
-		getContentPane().add(CSResults);
-		CSResults.setLayout(null);
-		CSResults.setVisible(false);
-		
-		CSRestultsLabel = new JLabel("Code Smells Results");
-		CSRestultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		CSRestultsLabel.setBounds(171, 60, 142, 24);
-		CSResults.add(CSRestultsLabel);
-		
-		directoryButton = new JButton("Select Directory");
-		directoryButton.setForeground(Color.WHITE);
-		directoryButton.setBorder(null);
-		directoryButton.addActionListener(this);
-		directoryButton.setBackground(new Color(52, 73, 94));
-		directoryButton.setBounds(324, 110, 150, 35);
-		CSResults.add(directoryButton);
-		
-		fileDirectory = new JTextField();
-		fileDirectory.setBorder(new LineBorder(new Color(189, 195, 199)));
-		fileDirectory.setBackground(Color.WHITE);
-		fileDirectory.setBounds(10, 110, 304, 35);
-		CSResults.add(fileDirectory);
-		
-		showResults = new JButton("Results");
-		showResults.setForeground(Color.WHITE);
-		showResults.setBorder(null);
-		showResults.setBackground(new Color(52, 73, 94));
-		showResults.setBounds(10, 385, 234, 35);
-		CSResults.add(showResults);
-		
-		JLabel lblNewLabel = new JLabel("Code Smells");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(45, 168, 106, 24);
-		CSResults.add(lblNewLabel);
-		
 		l1 = new DefaultListModel<>(); 
-        codeSmellsList = new JList<>(l1);
-		codeSmellsList.setBounds(26, 213, 122, 142);
-		CSResults.add(codeSmellsList);
 		
-		results = new JTextPane();
-		results.setBounds(254, 182, 205, 238);
-		CSResults.add(results);
+		columnNames = new ArrayList<String>();
+		columnNames.add("Identification");
+		List<String> n = new ArrayList<String>();
+		n.add("ccccc");
+		rows = new ArrayList<List<String>>();
+		rows.add(n);
 
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(255, 255, 255));
@@ -308,6 +272,53 @@ public class Gui extends JFrame implements ActionListener {
 		Export.add(warning_export);
 
 		getContentPane().add(Export);
+		
+		CSResults = new JPanel();
+		CSResults.setBackground(Color.WHITE);
+		CSResults.setBounds(0, 0, 484, 461);
+		getContentPane().add(CSResults);
+		CSResults.setLayout(null);
+		CSResults.setVisible(false);
+		
+		CSRestultsLabel = new JLabel("Code Smells Results");
+		CSRestultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		CSRestultsLabel.setBounds(171, 60, 142, 24);
+		CSResults.add(CSRestultsLabel);
+		
+		directoryButton = new JButton("Select Directory");
+		directoryButton.setForeground(Color.WHITE);
+		directoryButton.setBorder(null);
+		directoryButton.addActionListener(this);
+		directoryButton.setBackground(new Color(52, 73, 94));
+		directoryButton.setBounds(324, 110, 150, 35);
+		CSResults.add(directoryButton);
+		
+		fileDirectory = new JTextField();
+		fileDirectory.setBorder(new LineBorder(new Color(189, 195, 199)));
+		fileDirectory.setBackground(Color.WHITE);
+		fileDirectory.setBounds(10, 110, 304, 35);
+		CSResults.add(fileDirectory);
+		
+		showResults = new JButton("Results");
+		showResults.setForeground(Color.WHITE);
+		showResults.setBorder(null);
+		showResults.setBackground(new Color(52, 73, 94));
+		showResults.setBounds(10, 385, 234, 35);
+		CSResults.add(showResults);
+		
+		JLabel lblNewLabel = new JLabel("Code Smells");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(45, 168, 106, 24);
+		CSResults.add(lblNewLabel);
+		codeSmellsList = new JList<>(l1);
+		codeSmellsList.setBounds(26, 213, 122, 142);
+		CSResults.add(codeSmellsList);
+		
+		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
+		results = new JTable(finalData, columnNames.toArray());
+		results.setBounds(312, 191, 162, 229);
+		results.setFillsViewportHeight(true);
+		CSResults.add(results);
 
 	}
 
@@ -373,8 +384,7 @@ public class Gui extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == showResults) {
-			results.setText("oi");
-			
+			//columnNames = new String[]{"Identification", "aa"};
 		}
 
 		if (e.getSource() == importButton) {
