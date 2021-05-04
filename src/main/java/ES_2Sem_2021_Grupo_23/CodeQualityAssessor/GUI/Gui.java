@@ -3,12 +3,15 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
+
 
 import java.awt.event.*;
 import java.io.*;
@@ -74,6 +77,7 @@ public class Gui extends JFrame implements ActionListener {
     private JTable results;
     private List<String> columnNames;
     private List<List<String>> rows;
+    private JScrollPane resultsScroll;
 
 	public Gui() {
 		
@@ -83,10 +87,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		columnNames = new ArrayList<String>();
 		columnNames.add("Identification");
-		List<String> n = new ArrayList<String>();
-		n.add("ccccc");
 		rows = new ArrayList<List<String>>();
-		rows.add(n);
 
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(255, 255, 255));
@@ -310,6 +311,7 @@ public class Gui extends JFrame implements ActionListener {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel.setBounds(45, 168, 106, 24);
 		CSResults.add(lblNewLabel);
+		
 		codeSmellsList = new JList<>(l1);
 		codeSmellsList.setBounds(26, 213, 122, 142);
 		CSResults.add(codeSmellsList);
@@ -318,7 +320,9 @@ public class Gui extends JFrame implements ActionListener {
 		results = new JTable(finalData, columnNames.toArray());
 		results.setBounds(312, 191, 162, 229);
 		results.setFillsViewportHeight(true);
-		CSResults.add(results);
+		resultsScroll = new JScrollPane(results);
+		resultsScroll.setBounds(312, 191, 162, 229);
+		CSResults.add(resultsScroll);
 
 	}
 
@@ -384,7 +388,7 @@ public class Gui extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == showResults) {
-			//columnNames = new String[]{"Identification", "aa"};
+			getCodeSmells();
 		}
 
 		if (e.getSource() == importButton) {
@@ -492,6 +496,27 @@ public class Gui extends JFrame implements ActionListener {
 			RulesPageButton.setBackground(new Color(52, 73, 94));
 			CSResultsPageButton.setBackground(new Color(100, 120, 140));
 			refreshCodeSmellsList();
+		}
+	}
+	
+	private void getCodeSmells() {
+		columnNames.clear();
+		columnNames.add("Identification");
+		columnNames.add(codeSmellsList.getSelectedValue());
+		try{
+			List<Pair<String, Boolean>> cs = CodeSmell_Editor.getCodeSmellsResults(codeSmellsList.getSelectedValue(), rules.getRule(codeSmellsList.getSelectedValue()),
+					fileDirectory.getSelectedText());
+			List<String> s = new ArrayList<>();
+			for(Pair<String, Boolean> val: cs) {
+				s.clear();
+				s.add(val.a);
+				s.add(val.b.toString());
+				rows.add(s);
+			}
+			String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
+			results = new JTable(finalData, columnNames.toArray());
+		}catch (Exception e) {
+			
 		}
 	}
 	
