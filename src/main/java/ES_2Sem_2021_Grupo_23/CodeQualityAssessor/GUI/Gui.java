@@ -131,7 +131,6 @@ public class Gui extends JFrame implements ActionListener {
 		l1 = new DefaultListModel<>();
 
 		columnNames = new ArrayList<String>();
-		columnNames.add("Identification");
 		rows = new ArrayList<List<String>>();
 
 		JPanel Menu = new JPanel();
@@ -487,23 +486,23 @@ public class Gui extends JFrame implements ActionListener {
 		showResults.setBounds(10, 385, 234, 35);
 		CSResults.add(showResults);
 
-		JLabel lblNewLabel = new JLabel("Code Smells");
+		JLabel lblNewLabel = new JLabel("Select Code Smells");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(45, 168, 106, 24);
+		lblNewLabel.setBounds(45, 168, 150, 24);
 		CSResults.add(lblNewLabel);
 
 		codeSmellsList = new JList<>(l1);
 		codeSmellsList.setBounds(26, 213, 122, 142);
 		CSResults.add(codeSmellsList);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(274, 168, 200, 270);
-		CSResults.add(scrollPane);
-		
 		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 		results = new JTable(finalData, columnNames.toArray());
-		scrollPane.setViewportView(results);
 		
+		scrollPane = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPane.setBounds(274, 168, 200, 270);
+		CSResults.add(scrollPane);
+		scrollPane.setViewportView(results);
 
 	}
 
@@ -753,6 +752,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	private void getCodeSmells() {
 		columnNames.clear();
+		rows.clear();
 		columnNames.add("Identification");
 		List<String> csNames = codeSmellsList.getSelectedValuesList();
 		columnNames.addAll(csNames);
@@ -762,15 +762,15 @@ public class Gui extends JFrame implements ActionListener {
 				List<Pair<String, Boolean>> cs = CodeSmell_Editor.getCodeSmellsResults(rules.getRule(csNames.get(i)),
 						csNames.get(i), fileDirectory.getText());
 				
-				for (int x = 0; x < cs.size(); x++) {
-					if(map.get(cs.get(x).a) != null) {
-						List<String> l = map.get(cs.get(x).a);
-						l.add(i, cs.get(x).b.toString());
-						map.put(cs.get(x).a, l);
+				for (Pair<String, Boolean> x : cs) {
+					if(map.get(x.a) != null) {
+						List<String> l = map.get(x.a);
+						l.add(i, x.b.toString());
+						map.put(x.a, l);
 					}else {
 						List<String> l = new ArrayListAnySize<>();
-						l.add(i, cs.get(x).b.toString());
-						map.put(cs.get(x).a, l);
+						l.add(i, x.b.toString());
+						map.put(x.a, l);
 					}
 				}
 			}
@@ -785,6 +785,7 @@ public class Gui extends JFrame implements ActionListener {
 		    }
 			String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 			results = new JTable(finalData, columnNames.toArray());
+			results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			scrollPane.setViewportView(results);
 		} catch (Exception e) {
 			System.out.println(e);
