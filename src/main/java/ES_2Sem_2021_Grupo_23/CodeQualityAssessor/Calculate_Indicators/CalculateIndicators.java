@@ -15,7 +15,7 @@ import com.github.javaparser.utils.Pair;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 
 /**
- * @author tomas,dimano
+ * @author tomas,diogo mano
  *
  */
 public class CalculateIndicators {
@@ -24,14 +24,13 @@ public class CalculateIndicators {
 	 * @param directory
 	 * @param rule
 	 * @param ruleName
-	 * @return
+	 * @return the indicators for each methodid or classname, in case the rule doesnt exists in the xlsx file return null
 	 * @throws IOException
 	 * @throws ScriptException
 	 */
 
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException, ScriptException {
 		List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
-		ruleName = ruleName.toLowerCase();
 
 		FileInputStream f = new FileInputStream(new File(directory));
 		try (XSSFWorkbook workbook = new XSSFWorkbook(f)) {
@@ -88,7 +87,7 @@ public class CalculateIndicators {
 	 * 
 	 * @param list
 	 * @param compare
-	 * @return
+	 * @return true if the list contains already in th first element of the pair a string equal to string compare
 	 */
 	public static boolean containFirstElement(List<Pair<String, String>> list, String compare) {
 		for(Pair<String, String> l : list) {
