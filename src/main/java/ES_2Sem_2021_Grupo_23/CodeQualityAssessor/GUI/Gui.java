@@ -45,7 +45,7 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
 /**
  * 
- * @author Pedro Trincheiras and Bernardo Várzea and Filipe Barroso
+ * @author Pedro Trincheiras and Bernardo Vï¿½rzea and Filipe Barroso
  *
  */
 
