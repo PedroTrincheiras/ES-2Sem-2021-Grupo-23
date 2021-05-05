@@ -13,8 +13,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
 
-public class CodeSmell_Editor {
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
+public class CodeSmell_Editor {
+	
 	/**
 	 * Gives the result of the code smell for that class/methodID based on the rule
 	 * that was applied
