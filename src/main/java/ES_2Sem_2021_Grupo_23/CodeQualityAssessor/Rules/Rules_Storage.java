@@ -43,6 +43,15 @@ public class Rules_Storage {
 	}
 	
 	/**
+	 * Receives a rule name and removes it from the database
+	 * 
+	 * @param String - to search the rule in the Rule_Storage
+	 */
+	public void removeRule(String ruleName) {
+		this.rules.remove(ruleName);
+	}
+	
+	/**
 	 * Add a new rule to the Rule_Storage if it doesn't already exists
 	 * 
 	 * @param String - to check if the rule already exists and if not to use as hashmap key
