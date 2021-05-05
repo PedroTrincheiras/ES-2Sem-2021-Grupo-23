@@ -18,11 +18,12 @@ import com.github.javaparser.utils.Pair;
 public class CodeSmell_Editor {
 
 	/**
+	 * Gives the result of the code smell for that class/methodID based on the rule that was applied
 	 * 
-	 * @param rule -> rule inserted by the user
-	 * @param ruleName -> rule name
-	 * @param fromDirectory -> directory of the xlsx file 
-	 * @return list of pairs that contain a string that represents the class name or the methodID (depends on the rule name) and a boolean that
+	 * @param rule -> Rule inserted by the user
+	 * @param ruleName -> Rule name
+	 * @param fromDirectory -> Directory of the xlsx file 
+	 * @return List of pairs that contain a string that represents the class name or the methodID (depends on the rule name) and a boolean that
 	 * represents if that class or method for that rule is a CodeSmell or not
 	 * @throws IOException
 	 * @throws ScriptException
@@ -43,8 +44,8 @@ public class CodeSmell_Editor {
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
 					int WMC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(6).getNumericCellValue();
-					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
-					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(9).getNumericCellValue();
+					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(7).getNumericCellValue();
+					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
 
 					list.add(new Pair<String, Boolean>(methodID,
 							codeSmellIdentifier(rule, LOC_method, CYCLO_method, LOC_class, NOM_class, WMC_class)));
@@ -57,8 +58,8 @@ public class CodeSmell_Editor {
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
 					int WMC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(6).getNumericCellValue();
-					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
-					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(9).getNumericCellValue();
+					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(7).getNumericCellValue();
+					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
 
 					if (!list.contains(new Pair<String, Boolean>(className,
 							codeSmellIdentifier(rule, LOC_method, CYCLO_method, LOC_class, NOM_class, WMC_class))))
@@ -74,6 +75,7 @@ public class CodeSmell_Editor {
 	}
 
 	/**
+	 * Identifies if, based on a rule, there is a code smell or not
 	 * 
 	 * @param rule         -> rule inserted by the user
 	 * @param LOC_method   -> value of the LOC_method
@@ -81,8 +83,7 @@ public class CodeSmell_Editor {
 	 * @param LOC_class    -> value of the LOC_class
 	 * @param NOM_class    -> value of the NOM_class
 	 * @param WMC_class    -> value of the WMC_class
-	 * @return Boolean -> that identifies if the rule met the criteria that the user
-	 *         specified
+	 * @return Boolean -> represents if there is a code smell or not
 	 * @throws ScriptException
 	 */
 	public static Boolean codeSmellIdentifier(String rule, int LOC_method, int CYCLO_method, int LOC_class,
@@ -95,20 +96,23 @@ public class CodeSmell_Editor {
 
 			rule = rule.replaceAll("(?i)AND", "&&");
 			rule = rule.replaceAll("(?i)OR", "||");
+			
+			rule = rule.toLowerCase();
 
 			ScriptEngineManager factory = new ScriptEngineManager();
 			ScriptEngine engine = factory.getEngineByName("JavaScript");
-			engine.put("LOC_method", LOC_method);
-			engine.put("CYCLO_method", CYCLO_method);
-			engine.put("LOC_class", LOC_class);
-			engine.put("NOM_class", NOM_class);
-			engine.put("WMC_class", WMC_class);
+			engine.put("loc_method", LOC_method);
+			engine.put("cyclo_method", CYCLO_method);
+			engine.put("loc_class", LOC_class);
+			engine.put("nom_class", NOM_class);
+			engine.put("wmc_class", WMC_class);
 
 			return (Boolean) engine.eval(rule);
 		}
 	}
 
 	/**
+	 * Evaluates if the rule is valid or not
 	 * 
 	 * @param rule -> rule inserted by the user
 	 * @return Boolean -> that evaluates if the rule is a valid rule or not
