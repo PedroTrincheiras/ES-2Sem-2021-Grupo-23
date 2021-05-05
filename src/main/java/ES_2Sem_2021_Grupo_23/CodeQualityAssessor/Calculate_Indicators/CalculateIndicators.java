@@ -1,6 +1,7 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,11 +15,8 @@ import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 
-/**
- * @author tomas,diogo mano
- *
- */
 public class CalculateIndicators {
+	
 	/**
 	 * Open the xlsx file passed in the directory and search in the first line for the column with name equal to rulename,
 	 * apply the rule to each line of the file and compare the result with the result inserted manually by the user
@@ -29,7 +27,6 @@ public class CalculateIndicators {
 	 * @throws IOException
 	 * @throws ScriptException
 	 */
-
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException, ScriptException {
 		List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
 
