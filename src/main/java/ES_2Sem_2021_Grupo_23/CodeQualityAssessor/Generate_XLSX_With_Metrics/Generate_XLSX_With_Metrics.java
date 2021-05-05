@@ -34,7 +34,16 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.LOC_Method;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.WMC_Class;
 
+/**
+ * @author tomas
+ *
+ */
 public class Generate_XLSX_With_Metrics {
+	/**
+	 * @param fromdirectory
+	 * @param todirectory
+	 * @throws IOException
+	 */
 	public static void generateXLSX(String fromdirectory,String todirectory) throws IOException {
 		Map<Integer, Object[]> data = loadDirectory(fromdirectory);		
 		String[] foldername = fromdirectory.split(Matcher.quoteReplacement(System.getProperty("file.separator")));		
@@ -42,6 +51,11 @@ public class Generate_XLSX_With_Metrics {
 		writeToFile(generateWorkbook(data),name,todirectory);
 	}
 
+	/** search on directory all files .java and load the metrics and return a map with data from metrics
+	 * @param directory
+	 * @return
+	 * @throws IOException
+	 */
 	public static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
 		Map<Integer, Object[]> data = new TreeMap<Integer, Object[]>();
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))) {
@@ -49,7 +63,7 @@ public class Generate_XLSX_With_Metrics {
 			List<File> files = walk.map(x -> x.toFile()).filter(f -> f.getName().endsWith(".java"))
 					.collect(Collectors.toList());
 
-			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class","WMC_class", "is_God_class", "LOC_method", "CYCLO_method", "is_Long_method" });
+			data.put(1, new Object[] { "MethodID", "package", "class", "method", "NOM_class", "LOC_class","WMC_class", "LOC_method", "CYCLO_method"});
 			int i = 1;
 			for (File f : files) {
 				String pfile = getPackage(f);
@@ -75,14 +89,10 @@ public class Generate_XLSX_With_Metrics {
 							linesOfClasses.get(0).b,
 							//WMC_class,check
 							getBValue(wmc,methods.getValue0()),
-							//is_God_class
-							"is_God_class",
 							//LOC_method,check
 							methodLines.get(0).getValue2(),
 							//CYCLO_method,check
-							methods.getValue2(),
-							//is_Long_method
-							"is_Long_method" });
+							methods.getValue2() });
 					i++;
 					j++;
 				}
@@ -93,6 +103,10 @@ public class Generate_XLSX_With_Metrics {
 	}
 
 	
+	/** build workbook with data from map data
+	 * @param data
+	 * @return
+	 */
 	public static XSSFWorkbook generateWorkbook(Map<Integer, Object[]> data) {
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -116,6 +130,12 @@ public class Generate_XLSX_With_Metrics {
 		return workbook;
 	}
 	
+	/** write the workbook ins a xlsx file and save the file in the directory with name name
+	 * @param workbook
+	 * @param name
+	 * @param todirectory
+	 * @throws IOException
+	 */
 	private static void writeToFile(XSSFWorkbook workbook, String name, String todirectory) throws IOException {
 
 			// Write the workbook in file system
@@ -126,7 +146,7 @@ public class Generate_XLSX_With_Metrics {
 	
 	}
 
-	/** devolve o nome do package a que pertence o ficheiro
+	/** return the package of the file, if the file dont has a package return ""
 	 * 
 	 * @param f
 	 * @return string
@@ -140,7 +160,7 @@ public class Generate_XLSX_With_Metrics {
 		return package_name.get().getNameAsString();
 	}
 	
-	/**procura na lista de pares<string, integer> a string == name e devolve o par integer
+	/**search in the list of pairs<string, integer>a string that is equal to name and return the integer pair
 	 * 
 	 * @param list
 	 * @param name
