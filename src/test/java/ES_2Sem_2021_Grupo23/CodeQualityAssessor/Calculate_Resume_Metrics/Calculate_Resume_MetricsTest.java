@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import com.github.javaparser.utils.Pair;
 
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
+
 class Calculate_Resume_MetricsTest {
 
 	@Test

@@ -1,4 +1,4 @@
-package ES_2Sem_2021_Grupo23.CodeQualityAssessor.Calculate_Resume_Metrics;
+package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,23 +10,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
 
-/**
- * 
- * @author diogo mano
- *
- */
 
 public class Calculate_Resume_Metrics {
 	
 	/**
 	 * Receives a string(directory of the xlsx file) and read cell by cell. Count the number of packages,
 	 *  the number of classes, the number of methods and the number of lines. 
-	 * 
-	 * @param string - directory of the xlsx file
-	 * @return the number of packages, the number of classes, the number of methods and 
-	 * the number of lines
+	 *  
+	 * @param fromDirectory - directory of the xlsx file
+	 * @return a list of pairs with a string(number of packages, the number of classes, 
+	 * the number of methods or the number of lines)  and a integer with the result. 
+	 * @throws IOException
 	 */
-	
 	public static List<Pair<String,Integer>> readXLSX(String fromDirectory) throws IOException {
 		List<String> classes = new ArrayList<String>();
 		List<String> countLinesClasses = new ArrayList<String>();
