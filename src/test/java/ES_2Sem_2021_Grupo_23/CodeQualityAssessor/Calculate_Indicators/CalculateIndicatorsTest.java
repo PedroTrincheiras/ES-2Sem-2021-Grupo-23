@@ -3,9 +3,7 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +13,11 @@ import javax.script.ScriptException;
 import org.junit.jupiter.api.Test;
 import com.github.javaparser.utils.Pair;
 
-import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.NOM_Class;
-
 class CalculateIndicatorsTest {
 
 	@Test
 	void getIndicatorsTest() throws IOException, ScriptException {
-		String directory = "C:\\Users\\diogo\\OneDrive\\Documentos\\GitHub\\ES-2Sem-2021-Grupo-23\\jasmlFiles\\jasmlFiles_metrics.xlsx";
+		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "classe";
 		List<Pair<String, String>>  indicators = CalculateIndicators.getIndicators(directory, rule, ruleName);
@@ -77,7 +73,7 @@ class CalculateIndicatorsTest {
 	
 	@Test
 	void countIndicatorsTest() throws IOException, ScriptException {
-		String directory = "C:\\Users\\diogo\\OneDrive\\Documentos\\GitHub\\ES-2Sem-2021-Grupo-23\\jasmlFiles\\jasmlFiles_metrics.xlsx";
+		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "classe";
 		List<Pair<String, String>>  indicators = CalculateIndicators.getIndicators(directory, rule, ruleName);
