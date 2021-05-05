@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import groovy.lang.*;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,20 +16,22 @@ import com.github.javaparser.utils.Pair;
 public class CodeSmell_Editor {
 
 	/**
-	 * Gives the result of the code smell for that class/methodID based on the rule that was applied
+	 * Gives the result of the code smell for that class/methodID based on the rule
+	 * that was applied
 	 * 
-	 * @param rule -> Rule inserted by the user
-	 * @param ruleName -> Rule name
-	 * @param fromDirectory -> Directory of the xlsx file 
-	 * @return List of pairs that contain a string that represents the class name or the methodID (depends on the rule name) and a boolean that
-	 * represents if that class or method for that rule is a CodeSmell or not
+	 * @param rule          -> Rule inserted by the user
+	 * @param ruleName      -> Rule name
+	 * @param fromDirectory -> Directory of the xlsx file
+	 * @return List of pairs that contain a string that represents the class name or
+	 *         the methodID (depends on the rule name) and a boolean that represents
+	 *         if that class or method for that rule is a CodeSmell or not
 	 * @throws IOException
 	 * @throws ScriptException
 	 */
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
-			throws IOException, ScriptException {
+			throws IOException {
 		List<Pair<String, Boolean>> list = new ArrayList<Pair<String, Boolean>>();
-		
+
 		ruleName = ruleName.toLowerCase();
 
 		FileInputStream f = new FileInputStream(new File(fromDirectory));
@@ -68,8 +68,6 @@ public class CodeSmell_Editor {
 				}
 			}
 
-		} catch (NumberFormatException e) {
-			System.out.println(e);
 		}
 		return list;
 	}
@@ -87,7 +85,7 @@ public class CodeSmell_Editor {
 	 * @throws ScriptException
 	 */
 	public static Boolean codeSmellIdentifier(String rule, int LOC_method, int CYCLO_method, int LOC_class,
-			int NOM_class, int WMC_class) throws ScriptException {
+			int NOM_class, int WMC_class) {
 
 		if (!rule_Evaluator(rule)) {
 			throw new IllegalArgumentException();
@@ -96,18 +94,18 @@ public class CodeSmell_Editor {
 
 			rule = rule.replaceAll("(?i)AND", "&&");
 			rule = rule.replaceAll("(?i)OR", "||");
-			
+
 			rule = rule.toLowerCase();
 
-			ScriptEngineManager factory = new ScriptEngineManager();
-			ScriptEngine engine = factory.getEngineByName("JavaScript");
-			engine.put("loc_method", LOC_method);
-			engine.put("cyclo_method", CYCLO_method);
-			engine.put("loc_class", LOC_class);
-			engine.put("nom_class", NOM_class);
-			engine.put("wmc_class", WMC_class);
+			Binding metrics = new Binding();
+			GroovyShell shell = new GroovyShell(metrics);
+			metrics.setProperty("loc_method", LOC_method);
+			metrics.setProperty("cyclo_method", CYCLO_method);
+			metrics.setProperty("loc_class", LOC_class);
+			metrics.setProperty("nom_class", NOM_class);
+			metrics.setProperty("wmc_class", WMC_class);
 
-			return (Boolean) engine.eval(rule);
+			return (Boolean) shell.evaluate(rule);
 		}
 	}
 
