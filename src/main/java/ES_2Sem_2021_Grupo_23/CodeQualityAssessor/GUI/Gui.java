@@ -489,9 +489,11 @@ public class Gui extends JFrame implements ActionListener {
 		lblNewLabel.setBounds(45, 168, 150, 24);
 		CSResults.add(lblNewLabel);
 
+		JScrollPane csListScroll = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		codeSmellsList = new JList<>(l1);
-		codeSmellsList.setBounds(26, 213, 122, 142);
-		CSResults.add(codeSmellsList);
+		csListScroll.setBounds(26, 213, 122, 142);
+		CSResults.add(csListScroll);
+		csListScroll.setViewportView(codeSmellsList);
 		
 		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 		results = new JTable(finalData, columnNames.toArray());
