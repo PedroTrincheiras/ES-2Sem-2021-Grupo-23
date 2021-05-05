@@ -121,7 +121,7 @@ public class CalculateIndicators {
 		result_list.add(new Pair<String,Integer>("VP",vp));
 		result_list.add(new Pair<String,Integer>("FP",fp));
 		result_list.add(new Pair<String,Integer>("VN",vn));
-		result_list.add(new Pair<String,Integer>("FP",fn));
+		result_list.add(new Pair<String,Integer>("FN",fn));
 		return result_list;		
 	}
 }
