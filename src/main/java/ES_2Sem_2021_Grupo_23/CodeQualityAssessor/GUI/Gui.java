@@ -1,10 +1,38 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.script.ScriptException;
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 
 import com.github.javaparser.utils.Pair;
 
@@ -13,16 +41,7 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateI
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
-
-import java.awt.event.*;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
 /**
  * 
@@ -84,6 +103,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton Qchoose_import;
 	private JButton QimportButton;
 	private JTextField Qimport_directory;
+	private JScrollPane scrollPane;
 
 	private JPanel Quality;
 	private JLabel QL1;
@@ -462,6 +482,7 @@ public class Gui extends JFrame implements ActionListener {
 		showResults = new JButton("Results");
 		showResults.setForeground(Color.WHITE);
 		showResults.setBorder(null);
+		showResults.addActionListener(this);
 		showResults.setBackground(new Color(52, 73, 94));
 		showResults.setBounds(10, 385, 234, 35);
 		CSResults.add(showResults);
@@ -475,11 +496,13 @@ public class Gui extends JFrame implements ActionListener {
 		codeSmellsList.setBounds(26, 213, 122, 142);
 		CSResults.add(codeSmellsList);
 		
-		 String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
-		 results = new JTable(finalData, columnNames.toArray());
-		 results.setBounds(312, 191, 162, 229); results.setFillsViewportHeight(true);
-		 resultsScroll = new JScrollPane(results); resultsScroll.setBounds(312, 191,162, 229);
-		 CSResults.add(resultsScroll);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(274, 168, 200, 270);
+		CSResults.add(scrollPane);
+		
+		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
+		results = new JTable(finalData, columnNames.toArray());
+		scrollPane.setViewportView(results);
 		
 
 	}
@@ -731,21 +754,40 @@ public class Gui extends JFrame implements ActionListener {
 	private void getCodeSmells() {
 		columnNames.clear();
 		columnNames.add("Identification");
-		columnNames.add(codeSmellsList.getSelectedValue());
+		List<String> csNames = codeSmellsList.getSelectedValuesList();
+		columnNames.addAll(csNames);
+		Map<String, List<String>> map = new TreeMap<>();
 		try {
-			List<Pair<String, Boolean>> cs = CodeSmell_Editor.getCodeSmellsResults(codeSmellsList.getSelectedValue(),
-					rules.getRule(codeSmellsList.getSelectedValue()), fileDirectory.getSelectedText());
-			List<String> s = new ArrayList<>();
-			for (Pair<String, Boolean> val : cs) {
-				s.clear();
-				s.add(val.a);
-				s.add(val.b.toString());
-				rows.add(s);
+			for (int i = 0; i < csNames.size(); i++) {
+				List<Pair<String, Boolean>> cs = CodeSmell_Editor.getCodeSmellsResults(rules.getRule(csNames.get(i)),
+						csNames.get(i), fileDirectory.getText());
+				
+				for (int x = 0; x < cs.size(); x++) {
+					if(map.get(cs.get(x).a) != null) {
+						List<String> l = map.get(cs.get(x).a);
+						l.add(i, cs.get(x).b.toString());
+						map.put(cs.get(x).a, l);
+					}else {
+						List<String> l = new ArrayListAnySize<>();
+						l.add(i, cs.get(x).b.toString());
+						map.put(cs.get(x).a, l);
+					}
+				}
 			}
+			for (Map.Entry<String, List<String>> me : map.entrySet()) {
+				List<String> na = new ArrayListAnySize<>();
+				na = me.getValue();
+				if(na.size() < csNames.size() + 1) {
+					na.add((csNames.size() + 1), " ");
+				}
+				na.add(0, me.getKey());
+				rows.add(na);
+		    }
 			String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 			results = new JTable(finalData, columnNames.toArray());
+			scrollPane.setViewportView(results);
 		} catch (Exception e) {
-
+			System.out.println(e);
 		}
 	}
 
