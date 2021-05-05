@@ -48,5 +48,13 @@ class Rules_StorageTest {
 		storage.changeRule("Teste", "1");
 		assertTrue(storage.getRulesNames() != null);
 	}
+	
+	@Test
+	void removeRule() {
+		Rules_Storage storage = new Rules_Storage();
+		storage.addRule("Teste", "Teste");
+		storage.removeRule("Teste");
+		assertTrue(storage.getRule("Teste") == null);
+	}
 
 }

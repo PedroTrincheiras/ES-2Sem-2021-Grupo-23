@@ -1,9 +1,11 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.script.ScriptException;

@@ -52,7 +52,7 @@ public class CalculateIndicators {
 				return null;
 			if (ruleName.toLowerCase().contains("method")) {
 				for (int i = 1; i < workbook.getSheet("Metrics").getLastRowNum(); i++) {
-					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString();
+					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString().split("\\.")[0];
 
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
