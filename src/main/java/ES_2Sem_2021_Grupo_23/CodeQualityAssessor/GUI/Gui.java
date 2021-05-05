@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -36,7 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.github.javaparser.utils.Pair;
 
-import ES_2Sem_2021_Grupo23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
@@ -97,7 +96,6 @@ public class Gui extends JFrame implements ActionListener {
 	private JTable results;
 	private List<String> columnNames;
 	private List<List<String>> rows;
-	private JScrollPane resultsScroll;
 	private JButton QualityPageButton;
 	private JComboBox<String> Qrule_list;
 	private JButton Qchoose_import;
@@ -816,25 +814,5 @@ public class Gui extends JFrame implements ActionListener {
 		gui.setLocation(x, y);
 		gui.setVisible(true);
 		gui.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }
