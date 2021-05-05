@@ -3,9 +3,11 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.script.ScriptException;
@@ -16,10 +18,10 @@ import com.github.javaparser.utils.Pair;
 class CalculateIndicatorsTest {
 
 	@Test
-	void getIndicatorsTest() throws IOException, ScriptException {
+	void getIndicatorsClassTest() throws IOException, ScriptException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
-		String ruleName = "classe";
+		String ruleName = "toTestClass";
 		List<Pair<String, String>>  indicators = CalculateIndicators.getIndicators(directory, rule, ruleName);
 		List<Pair<String, String>> expectedIndicators = new ArrayList<Pair<String, String>>();
 		expectedIndicators.add(new Pair<String, String>("Attribute","VN"));
@@ -72,10 +74,30 @@ class CalculateIndicatorsTest {
 	}
 	
 	@Test
+	void getIndicatorsMethodTest() throws IOException, ScriptException {
+		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
+		String rule = "WMC_class> 50 OR NOM_class> 10";
+		String ruleName = "toTestMethod";
+		List<Pair<String, String>>  indicators = CalculateIndicators.getIndicators(directory, rule, ruleName);
+		List<Pair<String, String>> expectedIndicators = new ArrayList<Pair<String, String>>();
+		expectedIndicators.add(new Pair<String, String>("1.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("2.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("3.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("4.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("5.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("6.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("7.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("8.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("9.0","VN"));
+		expectedIndicators.add(new Pair<String, String>("10.0","VN"));
+		assertEquals(expectedIndicators, indicators.subList(0, 10));
+	}
+	
+	@Test
 	void countIndicatorsTest() throws IOException, ScriptException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
-		String ruleName = "classe";
+		String ruleName = "toTestClass";
 		List<Pair<String, String>>  indicators = CalculateIndicators.getIndicators(directory, rule, ruleName);
 		List<Pair<String, Integer>>  countIndicators = CalculateIndicators.countIndicators(indicators);
 		List<Pair<String, Integer>> expectedCountIndicators = new ArrayList<Pair<String, Integer>>();
@@ -84,5 +106,13 @@ class CalculateIndicatorsTest {
 		expectedCountIndicators.add(new Pair<String, Integer>("VN",22));
 		expectedCountIndicators.add(new Pair<String, Integer>("FN",18));
 		assertEquals(expectedCountIndicators, countIndicators);
+	}
+	
+	@Test
+	void ruleNameError() throws IOException, ScriptException {
+		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
+		String rule = "WMC_class> 50 OR NOM_class> 10";
+		String ruleName = "test";
+		assertThrows(InputMismatchException.class, () -> CalculateIndicators.getIndicators(directory, rule, ruleName));
 	}
 }

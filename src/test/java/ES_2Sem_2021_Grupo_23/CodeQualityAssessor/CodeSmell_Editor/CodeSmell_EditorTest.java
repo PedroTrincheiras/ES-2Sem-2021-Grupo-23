@@ -24,7 +24,7 @@ class CodeSmell_EditorTest {
 	
 	@Test
 	void checkValidRule() {
-		assertThrows(IllegalArgumentException.class , () -> CodeSmell_Editor.getCodeSmellsResults("$$$", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
+		assertThrows(IllegalArgumentException.class , () -> CodeSmell_Editor.getCodeSmellsResults("###", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
 	}
 	
 	@Test

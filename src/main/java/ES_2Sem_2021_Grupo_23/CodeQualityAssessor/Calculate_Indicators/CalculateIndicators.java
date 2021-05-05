@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.script.ScriptException;
@@ -28,6 +29,10 @@ public class CalculateIndicators {
 	 * @throws ScriptException
 	 */
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException, ScriptException {
+		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class") ) {
+			throw new InputMismatchException();
+		}
+		
 		List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
 
 		FileInputStream f = new FileInputStream(new File(directory));
@@ -40,7 +45,7 @@ public class CalculateIndicators {
 			}
 			//return null if the rulename dont exist in the xlsx file
 			if(column==0)return null;
-			if (ruleName.contains("method")) {
+			if (ruleName.toLowerCase().contains("method")) {
 				for (int i = 1; i < workbook.getSheet("Metrics").getLastRowNum(); i++) {
 					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString();
 
