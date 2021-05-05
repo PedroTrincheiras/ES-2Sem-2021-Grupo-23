@@ -37,13 +37,6 @@ public class LOC_Method {
 		return methods;
 	}
 	
-	
-	/**
-	 * Counts the number of lines of every method and constructor in a class/interface
-	 * 
-	 * @param coid - a class/interface
-	 * @return number of lines of every method and constructor of the class/interface (coid)
-	 */
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Triplet<String, String, Integer>>> {
 
 		@Override

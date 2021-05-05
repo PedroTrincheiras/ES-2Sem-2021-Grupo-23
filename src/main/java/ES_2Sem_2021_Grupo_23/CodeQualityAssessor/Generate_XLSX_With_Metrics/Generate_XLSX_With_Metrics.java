@@ -40,6 +40,7 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Metrics.WMC_Class;
  */
 public class Generate_XLSX_With_Metrics {
 	/**
+	 * Receive 2 directory one is the directory of the project and the other to save the file, and call the function generateXLSX
 	 * @param fromdirectory
 	 * @param todirectory
 	 * @throws IOException
@@ -51,9 +52,10 @@ public class Generate_XLSX_With_Metrics {
 		writeToFile(generateWorkbook(data),name,todirectory);
 	}
 
-	/** search on directory all files .java and load the metrics and return a map with data from metrics
+	/** 
+	 * Search on directory all files .java and load the metrics and return a map with data from metrics
 	 * @param directory
-	 * @return
+	 * @return Map to be written on the workbook
 	 * @throws IOException
 	 */
 	public static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
@@ -103,9 +105,10 @@ public class Generate_XLSX_With_Metrics {
 	}
 
 	
-	/** build workbook with data from map data
+	/** 
+	 * Build workbook with data from map data
 	 * @param data
-	 * @return
+	 * @return workbook with all the data
 	 */
 	public static XSSFWorkbook generateWorkbook(Map<Integer, Object[]> data) {
 		@SuppressWarnings("resource")
@@ -130,7 +133,8 @@ public class Generate_XLSX_With_Metrics {
 		return workbook;
 	}
 	
-	/** write the workbook ins a xlsx file and save the file in the directory with name name
+	/** 
+	 * Write the workbook ins a xlsx file and save the file in the directory with name name
 	 * @param workbook
 	 * @param name
 	 * @param todirectory
@@ -146,10 +150,11 @@ public class Generate_XLSX_With_Metrics {
 	
 	}
 
-	/** return the package of the file, if the file dont has a package return ""
+	/** 
+	 * Return the package of the file, if the file dont has a package return ""
 	 * 
 	 * @param f
-	 * @return string
+	 * @return name of the package
 	 * @throws FileNotFoundException
 	 */
 	private static String getPackage(File f) throws FileNotFoundException {
@@ -160,11 +165,11 @@ public class Generate_XLSX_With_Metrics {
 		return package_name.get().getNameAsString();
 	}
 	
-	/**search in the list of pairs<string, integer>a string that is equal to name and return the integer pair
-	 * 
+	/**
+	 * Search in the list of pairs<string, integer>a string that is equal to name and return the integer pair
 	 * @param list
 	 * @param name
-	 * @return int
+	 * @return Integer
 	 */
 	private static int getBValue(List<Pair<String, Integer>> list, String name){
 		int result=0;
