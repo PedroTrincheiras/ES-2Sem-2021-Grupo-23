@@ -22,7 +22,7 @@ class CodeSmell_EditorTest {
 	
 	@Test
 	void getCodeSmellsResults() throws ScriptException, IOException {
-		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "C:/Users/Portátil TMAG/Desktop/ES Project/ES-2Sem-2021-Grupo-23/jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
+		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
 		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
 		expectedList.add(new Pair<String, Boolean>("Attribute", false));
 		expectedList.add(new Pair<String, Boolean>("ExceptionTableItem", false));
