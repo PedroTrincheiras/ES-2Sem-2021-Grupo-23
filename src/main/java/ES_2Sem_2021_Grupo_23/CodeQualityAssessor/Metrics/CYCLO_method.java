@@ -21,12 +21,6 @@ import com.github.javaparser.ast.stmt.SwitchStmt;
 import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-/**
- * 
- * @author Diogo Mano
- *
- */
-
 public class CYCLO_method {
 	
 	/**
@@ -35,7 +29,6 @@ public class CYCLO_method {
 	 * @param file - to count the number of if, for, forEach, while, do, and cases in methods and constructors
 	 * @return contains the name of the class, the name of the method/constructor and the number of if, for, forEach, while, do, and cases of that method/constructor
 	 */
-	
 	public static List<Triplet<String, String, Integer>> getCYCLO(File file) {
 		List<Triplet<String, String, Integer>> classes = new ArrayList<Triplet<String, String, Integer>>();
 		try {			
@@ -109,7 +102,6 @@ public class CYCLO_method {
 	 * @param cd - a constructor
 	 * @return the number of if, for, forEach, while, do, and cases added to 1 in a constructor
 	 */
-	
 	private static int getConstructorSize(ConstructorDeclaration cd) {
 		List<Node> l = new ArrayList<Node>();
 		Visitor v = new Visitor();
@@ -123,7 +115,6 @@ public class CYCLO_method {
 	 * @param md - a method
 	 * @return the number of if, for, forEach, while, do and cases added to 1 in a method
 	 */
-	
 	private static int getMethodSize(MethodDeclaration md) {
 		List<Node> l = new ArrayList<Node>();
 		Visitor v = new Visitor();

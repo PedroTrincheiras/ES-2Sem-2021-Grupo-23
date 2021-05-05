@@ -6,7 +6,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.github.javaparser.utils.Pair;
 
-import ES_2Sem_2021_Grupo23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
+import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
 
