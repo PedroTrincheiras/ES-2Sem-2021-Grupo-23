@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.script.ScriptException;
@@ -19,11 +20,13 @@ class CodeSmell_EditorTest {
 		Boolean b = CodeSmell_Editor.codeSmellIdentifier("CYCLO_method < 5", 0, 0, 0, 0, 0);
 		assertEquals(b, true);
 	}
-	
+
 	@Test
 	void getCodeSmellsResults() throws IOException {
-		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "C:/Users/Portátil TMAG/Desktop/ES Project/ES-2Sem-2021-Grupo-23/jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
-		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
+		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10",
+				"CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx");
+		System.out.println(list);
+		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String, Boolean>>();
 		expectedList.add(new Pair<String, Boolean>("Attribute", false));
 		expectedList.add(new Pair<String, Boolean>("ExceptionTableItem", false));
 		expectedList.add(new Pair<String, Boolean>("Opcode", false));
@@ -34,7 +37,14 @@ class CodeSmell_EditorTest {
 		expectedList.add(new Pair<String, Boolean>("InnerClass", false));
 		expectedList.add(new Pair<String, Boolean>("Attribute_InnerClasses", false));
 		expectedList.add(new Pair<String, Boolean>("LineNumber", false));
-		assertEquals(list, expectedList);
+		assertEquals(list.subList(0, 10), expectedList);
+	}
+
+	@Test
+	void getCodeSmellsResultsRuleNameError() throws IOException {
+		assertThrows(InputMismatchException.class,
+				() -> CodeSmell_Editor.getCodeSmellsResults("WMC_class> 50 OR NOM_class> 10", "test",
+						"jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx"));
 	}
 
 }
