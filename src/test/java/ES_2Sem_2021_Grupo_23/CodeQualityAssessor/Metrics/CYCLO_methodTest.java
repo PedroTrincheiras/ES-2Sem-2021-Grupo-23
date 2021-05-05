@@ -81,9 +81,9 @@ class CYCLO_methodTest {
 	
 	@Test
 	void Undefined() {
-		File file = new File("Undefined");
-		List<Triplet<String, String, Integer>> expectedCyclos = CYCLO_method.getCYCLO(file);
-		assertNull(expectedCyclos);
+		File file = new File("not\\valid\\path.java");
+		List<Triplet<String, String, Integer>> results = CYCLO_method.getCYCLO(file);
+		assertNull(results);
 	}
 
 }

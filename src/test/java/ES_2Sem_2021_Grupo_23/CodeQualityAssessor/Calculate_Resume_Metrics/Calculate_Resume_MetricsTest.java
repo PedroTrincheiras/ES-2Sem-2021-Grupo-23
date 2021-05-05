@@ -26,7 +26,7 @@ class Calculate_Resume_MetricsTest {
 	}
 	@Test
 	void Undefined() throws IOException {
-		String file = "Undefined";
+		String file = "not\\valid\\path.java";
 		List<Pair<String, Integer>> expectedCalculateMetrics = Calculate_Resume_Metrics.readXLSX(file);
 		assertNull(expectedCalculateMetrics);
 	}
