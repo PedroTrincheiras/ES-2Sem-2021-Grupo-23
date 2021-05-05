@@ -43,8 +43,8 @@ public class CodeSmell_Editor {
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
 					int WMC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(6).getNumericCellValue();
-					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
-					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(9).getNumericCellValue();
+					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(7).getNumericCellValue();
+					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
 
 					list.add(new Pair<String, Boolean>(methodID,
 							codeSmellIdentifier(rule, LOC_method, CYCLO_method, LOC_class, NOM_class, WMC_class)));
@@ -57,8 +57,8 @@ public class CodeSmell_Editor {
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
 					int WMC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(6).getNumericCellValue();
-					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
-					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(9).getNumericCellValue();
+					int LOC_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(7).getNumericCellValue();
+					int CYCLO_method = (int) workbook.getSheet("Metrics").getRow(i).getCell(8).getNumericCellValue();
 
 					if (!list.contains(new Pair<String, Boolean>(className,
 							codeSmellIdentifier(rule, LOC_method, CYCLO_method, LOC_class, NOM_class, WMC_class))))
@@ -95,14 +95,16 @@ public class CodeSmell_Editor {
 
 			rule = rule.replaceAll("(?i)AND", "&&");
 			rule = rule.replaceAll("(?i)OR", "||");
+			
+			rule = rule.toLowerCase();
 
 			ScriptEngineManager factory = new ScriptEngineManager();
 			ScriptEngine engine = factory.getEngineByName("JavaScript");
-			engine.put("LOC_method", LOC_method);
-			engine.put("CYCLO_method", CYCLO_method);
-			engine.put("LOC_class", LOC_class);
-			engine.put("NOM_class", NOM_class);
-			engine.put("WMC_class", WMC_class);
+			engine.put("loc_method", LOC_method);
+			engine.put("cyclo_method", CYCLO_method);
+			engine.put("loc_class", LOC_class);
+			engine.put("nom_class", NOM_class);
+			engine.put("wmc_class", WMC_class);
 
 			return (Boolean) engine.eval(rule);
 		}
