@@ -102,6 +102,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton QimportButton;
 	private JTextField Qimport_directory;
 	private JScrollPane scrollPane;
+	private JButton removeButton;
 
 	private JPanel Quality;
 	private JLabel QL1;
@@ -130,52 +131,122 @@ public class Gui extends JFrame implements ActionListener {
 
 		columnNames = new ArrayList<String>();
 		rows = new ArrayList<List<String>>();
+		
+				JPanel Menu = new JPanel();
+				Menu.setBackground(new Color(255, 255, 255));
+				Menu.setBounds(0, 0, 484, 36);
+				getContentPane().add(Menu);
+				Menu.setLayout(null);
+				
+						ExportPageButton = new JButton("Export");
+						ExportPageButton.setForeground(new Color(255, 255, 255));
+						ExportPageButton.setBackground(new Color(100, 120, 140));
+						ExportPageButton.setBounds(10, 0, 65, 36);
+						ExportPageButton.addActionListener(this);
+						ExportPageButton.setBorder(null);
+						Menu.add(ExportPageButton);
+						
+								ImportPageButton = new JButton("Import");
+								ImportPageButton.setForeground(new Color(255, 255, 255));
+								ImportPageButton.setBackground(new Color(52, 73, 94));
+								ImportPageButton.setBounds(85, 0, 65, 36);
+								ImportPageButton.addActionListener(this);
+								ImportPageButton.setBorder(null);
+								Menu.add(ImportPageButton);
+								
+										RulesPageButton = new JButton("Rules");
+										RulesPageButton.setForeground(Color.WHITE);
+										RulesPageButton.setBorder(null);
+										RulesPageButton.setBackground(new Color(52, 73, 94));
+										RulesPageButton.setBounds(160, 0, 65, 36);
+										RulesPageButton.addActionListener(this);
+										Menu.add(RulesPageButton);
+										
+												CSResultsPageButton = new JButton("Results");
+												CSResultsPageButton.setForeground(Color.WHITE);
+												CSResultsPageButton.setBorder(null);
+												CSResultsPageButton.setBackground(new Color(52, 73, 94));
+												CSResultsPageButton.setBounds(235, 0, 65, 36);
+												CSResultsPageButton.addActionListener(this);
+												Menu.add(CSResultsPageButton);
+												
+														QualityPageButton = new JButton("Quality");
+														QualityPageButton.setForeground(Color.WHITE);
+														QualityPageButton.setBorder(null);
+														QualityPageButton.addActionListener(this);
+														QualityPageButton.setBackground(new Color(52, 73, 94));
+														QualityPageButton.setBounds(310, 0, 65, 36);
+														Menu.add(QualityPageButton);
 
-		JPanel Menu = new JPanel();
-		Menu.setBackground(new Color(255, 255, 255));
-		Menu.setBounds(0, 0, 484, 36);
-		getContentPane().add(Menu);
-		Menu.setLayout(null);
+		Rules = new JPanel();
+		Rules.setBackground(Color.WHITE);
+		Rules.setBounds(0, 0, 484, 461);
+		getContentPane().add(Rules);
+		Rules.setLayout(null);
+		Rules.setVisible(false);
 
-		ExportPageButton = new JButton("Export");
-		ExportPageButton.setForeground(new Color(255, 255, 255));
-		ExportPageButton.setBackground(new Color(100, 120, 140));
-		ExportPageButton.setBounds(10, 0, 65, 36);
-		ExportPageButton.addActionListener(this);
-		ExportPageButton.setBorder(null);
-		Menu.add(ExportPageButton);
+		rule_input = new JTextField();
+		rule_input.setBorder(new LineBorder(new Color(189, 195, 199)));
+		rule_input.setBackground(Color.WHITE);
+		rule_input.setBounds(10, 258, 464, 35);
+		Rules.add(rule_input);
 
-		ImportPageButton = new JButton("Import");
-		ImportPageButton.setForeground(new Color(255, 255, 255));
-		ImportPageButton.setBackground(new Color(52, 73, 94));
-		ImportPageButton.setBounds(85, 0, 65, 36);
-		ImportPageButton.addActionListener(this);
-		ImportPageButton.setBorder(null);
-		Menu.add(ImportPageButton);
+		operatorsLabel = new JLabel("Use &&(and) ||(or)");
+		operatorsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		operatorsLabel.setBounds(154, 55, 130, 24);
+		Rules.add(operatorsLabel);
 
-		RulesPageButton = new JButton("Rules");
-		RulesPageButton.setForeground(Color.WHITE);
-		RulesPageButton.setBorder(null);
-		RulesPageButton.setBackground(new Color(52, 73, 94));
-		RulesPageButton.setBounds(160, 0, 65, 36);
-		RulesPageButton.addActionListener(this);
-		Menu.add(RulesPageButton);
+		setRuleButton = new JButton("Set Rule");
+		setRuleButton.setForeground(Color.WHITE);
+		setRuleButton.setBorder(null);
+		setRuleButton.setBackground(new Color(52, 73, 94));
+		setRuleButton.setBounds(140, 339, 186, 35);
+		setRuleButton.addActionListener(this);
+		Rules.add(setRuleButton);
 
-		CSResultsPageButton = new JButton("Results");
-		CSResultsPageButton.setForeground(Color.WHITE);
-		CSResultsPageButton.setBorder(null);
-		CSResultsPageButton.setBackground(new Color(52, 73, 94));
-		CSResultsPageButton.setBounds(235, 0, 65, 36);
-		CSResultsPageButton.addActionListener(this);
-		Menu.add(CSResultsPageButton);
+		rule_name = new JTextField();
+		rule_name.setToolTipText("");
+		rule_name.setBorder(new LineBorder(new Color(189, 195, 199)));
+		rule_name.setBackground(Color.WHITE);
+		rule_name.setBounds(10, 190, 464, 35);
+		Rules.add(rule_name);
 
-		QualityPageButton = new JButton("Quality");
-		QualityPageButton.setForeground(Color.WHITE);
-		QualityPageButton.setBorder(null);
-		QualityPageButton.addActionListener(this);
-		QualityPageButton.setBackground(new Color(52, 73, 94));
-		QualityPageButton.setBounds(310, 0, 65, 36);
-		Menu.add(QualityPageButton);
+		exampleRuleLabel = new JLabel("Example : loc_method>5 && loc_class>10");
+		exampleRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		exampleRuleLabel.setBounds(97, 83, 284, 24);
+		Rules.add(exampleRuleLabel);
+
+		ruleNameLabel = new JLabel("Rule Name");
+		ruleNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		ruleNameLabel.setBounds(10, 166, 64, 24);
+		Rules.add(ruleNameLabel);
+
+		ruleLabel = new JLabel("Rule");
+		ruleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		ruleLabel.setBounds(10, 233, 64, 24);
+		Rules.add(ruleLabel);
+
+		rule_list = new JComboBox<String>();
+		rule_list.setBounds(10, 133, 141, 22);
+		Rules.add(rule_list);
+
+		changeRuleLabel = new JLabel("Change Rule");
+		changeRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		changeRuleLabel.setBounds(10, 108, 64, 24);
+		Rules.add(changeRuleLabel);
+
+		ruleStatusLabel = new JLabel("");
+		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		ruleStatusLabel.setBounds(140, 304, 186, 24);
+		Rules.add(ruleStatusLabel);
+
+		removeButton = new JButton("Remove Selected Rule");
+		removeButton.setForeground(Color.WHITE);
+		removeButton.setBorder(null);
+		removeButton.setBackground(new Color(52, 73, 94));
+		removeButton.addActionListener(this);
+		removeButton.setBounds(268, 133, 163, 22);
+		Rules.add(removeButton);
 
 		setTitle("Metric Exporter");
 		getContentPane().setLayout(null);
@@ -291,88 +362,26 @@ public class Gui extends JFrame implements ActionListener {
 		Qwarning_import.setHorizontalAlignment(SwingConstants.CENTER);
 		Qwarning_import.setBounds(136, 217, 178, 26);
 		Quality.add(Qwarning_import);
-		
+
 		QVPtext = new JLabel("VP = ?");
 		QVPtext.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		QVPtext.setBounds(343, 336, 88, 22);
 		Quality.add(QVPtext);
-		
+
 		QVNtext = new JLabel("VN = ?");
 		QVNtext.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		QVNtext.setBounds(343, 361, 88, 22);
 		Quality.add(QVNtext);
-		
+
 		QFPtext = new JLabel("FP = ?");
 		QFPtext.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		QFPtext.setBounds(343, 383, 88, 22);
 		Quality.add(QFPtext);
-		
+
 		QFNtext = new JLabel("FN = ?");
 		QFNtext.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		QFNtext.setBounds(343, 404, 88, 22);
 		Quality.add(QFNtext);
-
-		Rules = new JPanel();
-		Rules.setBackground(Color.WHITE);
-		Rules.setBounds(0, 0, 484, 461);
-		getContentPane().add(Rules);
-		Rules.setLayout(null);
-		Rules.setVisible(false);
-
-		rule_input = new JTextField();
-		rule_input.setBorder(new LineBorder(new Color(189, 195, 199)));
-		rule_input.setBackground(Color.WHITE);
-		rule_input.setBounds(10, 258, 464, 35);
-		Rules.add(rule_input);
-
-		operatorsLabel = new JLabel("Use &&(and) ||(or)");
-		operatorsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		operatorsLabel.setBounds(154, 55, 130, 24);
-		Rules.add(operatorsLabel);
-
-		setRuleButton = new JButton("Set Rule");
-		setRuleButton.setForeground(Color.WHITE);
-		setRuleButton.setBorder(null);
-		setRuleButton.setBackground(new Color(52, 73, 94));
-		setRuleButton.setBounds(140, 339, 186, 35);
-		setRuleButton.addActionListener(this);
-		Rules.add(setRuleButton);
-
-		rule_name = new JTextField();
-		rule_name.setToolTipText("");
-		rule_name.setBorder(new LineBorder(new Color(189, 195, 199)));
-		rule_name.setBackground(Color.WHITE);
-		rule_name.setBounds(10, 190, 464, 35);
-		Rules.add(rule_name);
-
-		exampleRuleLabel = new JLabel("Example : loc_method>5 && loc_class>10");
-		exampleRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		exampleRuleLabel.setBounds(97, 83, 284, 24);
-		Rules.add(exampleRuleLabel);
-
-		ruleNameLabel = new JLabel("Rule Name");
-		ruleNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		ruleNameLabel.setBounds(10, 166, 64, 24);
-		Rules.add(ruleNameLabel);
-
-		ruleLabel = new JLabel("Rule");
-		ruleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		ruleLabel.setBounds(10, 233, 64, 24);
-		Rules.add(ruleLabel);
-
-		rule_list = new JComboBox<String>();
-		rule_list.setBounds(10, 133, 141, 22);
-		Rules.add(rule_list);
-
-		changeRuleLabel = new JLabel("Change Rule");
-		changeRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		changeRuleLabel.setBounds(10, 108, 64, 24);
-		Rules.add(changeRuleLabel);
-
-		ruleStatusLabel = new JLabel("");
-		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		ruleStatusLabel.setBounds(140, 304, 186, 24);
-		Rules.add(ruleStatusLabel);
 
 		getContentPane().add(Import);
 
@@ -489,20 +498,20 @@ public class Gui extends JFrame implements ActionListener {
 		lblNewLabel.setBounds(45, 168, 150, 24);
 		CSResults.add(lblNewLabel);
 
-		JScrollPane csListScroll = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane csListScroll = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		codeSmellsList = new JList<>(l1);
 		csListScroll.setBounds(26, 213, 122, 142);
 		CSResults.add(csListScroll);
 		csListScroll.setViewportView(codeSmellsList);
-		
+
 		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 		results = new JTable(finalData, columnNames.toArray());
-		
+
 		scrollPane = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scrollPane.setBounds(274, 168, 200, 270);
-		CSResults.add(scrollPane);
+		results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); scrollPane.setBounds(274,168, 200, 270); CSResults.add(scrollPane);
 		scrollPane.setViewportView(results);
+		 
 
 	}
 
@@ -570,6 +579,21 @@ public class Gui extends JFrame implements ActionListener {
 		if (e.getSource() == showResults) {
 			getCodeSmells();
 		}
+		
+		if (e.getSource() == removeButton) {
+			rules.removeRule(rule_list.getSelectedItem().toString());
+			refreshRuleList(rule_list);
+			rule_name.setText("");
+			rule_input.setText("");
+			try {
+				rules.saveCurrentDatabase();
+				ruleStatusLabel.setText("Successfully Removed");
+				ruleStatusLabel.setForeground(Color.green);
+			} catch (Exception e1) {
+				ruleStatusLabel.setText("Removal Error");
+				ruleStatusLabel.setForeground(Color.red);
+			}
+		}
 
 		if (e.getSource() == importButton) {
 			String fromFile = toReadImport.getText();
@@ -598,7 +622,7 @@ public class Gui extends JFrame implements ActionListener {
 				change_rule = true;
 			}
 		}
-		
+
 		if (e.getSource() == Qchoose_import) {
 			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			fc.setMultiSelectionEnabled(false);
@@ -616,7 +640,7 @@ public class Gui extends JFrame implements ActionListener {
 			if (Qrule_list.getSelectedItem() != null) {
 				String rname = Qrule_list.getSelectedItem().toString();
 				String rule = rules.getRule(rname);
-				
+
 				String fromFile = Qimport_directory.getText();
 				try {
 					List<Pair<String, Integer>> indicators = CalculateIndicators
@@ -629,7 +653,6 @@ public class Gui extends JFrame implements ActionListener {
 					QVNtext.setText("VN = " + indicators.get(2).b.toString());
 					QFNlabel.setText(indicators.get(3).b.toString());
 					QFNtext.setText("FN = " + indicators.get(3).b.toString());
-					
 
 				} catch (IOException | ScriptException e1) {
 					Qwarning_import.setForeground(Color.RED);
@@ -720,6 +743,7 @@ public class Gui extends JFrame implements ActionListener {
 			RulesPageButton.setBackground(new Color(100, 120, 140));
 			CSResultsPageButton.setBackground(new Color(52, 73, 94));
 			QualityPageButton.setBackground(new Color(52, 73, 94));
+			ruleStatusLabel.setText("");
 			refreshRuleList(rule_list);
 		}
 		if (e.getSource() == CSResultsPageButton) {
@@ -761,13 +785,13 @@ public class Gui extends JFrame implements ActionListener {
 			for (int i = 0; i < csNames.size(); i++) {
 				List<Pair<String, Boolean>> cs = CodeSmell_Editor.getCodeSmellsResults(rules.getRule(csNames.get(i)),
 						csNames.get(i), fileDirectory.getText());
-				
+
 				for (Pair<String, Boolean> x : cs) {
-					if(map.get(x.a) != null) {
+					if (map.get(x.a) != null) {
 						List<String> l = map.get(x.a);
 						l.add(i, x.b.toString());
 						map.put(x.a, l);
-					}else {
+					} else {
 						List<String> l = new ArrayListAnySize<>();
 						l.add(i, x.b.toString());
 						map.put(x.a, l);
@@ -777,12 +801,12 @@ public class Gui extends JFrame implements ActionListener {
 			for (Map.Entry<String, List<String>> me : map.entrySet()) {
 				List<String> na = new ArrayListAnySize<>();
 				na = me.getValue();
-				if(na.size() < csNames.size() + 1) {
+				if (na.size() < csNames.size() + 1) {
 					na.add((csNames.size() + 1), " ");
 				}
 				na.add(0, me.getKey());
 				rows.add(na);
-		    }
+			}
 			String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 			results = new JTable(finalData, columnNames.toArray());
 			results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
