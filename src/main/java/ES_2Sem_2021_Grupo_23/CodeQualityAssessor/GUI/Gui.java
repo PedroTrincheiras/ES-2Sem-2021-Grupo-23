@@ -29,8 +29,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.junit.Ignore;
-
 import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics;
@@ -39,6 +37,7 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Edit
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Generate_XLSX_With_Metrics;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
+
 
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7448241899663378705L;
