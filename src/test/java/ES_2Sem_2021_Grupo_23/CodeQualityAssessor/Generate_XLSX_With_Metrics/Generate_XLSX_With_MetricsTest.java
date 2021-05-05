@@ -15,27 +15,28 @@ class Generate_XLSX_With_MetricsTest {
 	void testGenerateXLSX() {
 		String folder = ("jasmlFiles\\");
 		FileInputStream f;
-		Boolean equal=true;
+		Boolean equal = true;
 		try {
-			XSSFWorkbook toTeste=Generate_XLSX_With_Metrics.generateWorkbook(Generate_XLSX_With_Metrics.loadDirectory(folder));
+			XSSFWorkbook toTeste = Generate_XLSX_With_Metrics
+					.generateWorkbook(Generate_XLSX_With_Metrics.loadDirectory(folder));
 			f = new FileInputStream(new File("jasmlFiles\\jasmlFiles_metrics.xlsx"));
 			@SuppressWarnings("resource")
-			XSSFWorkbook expected=new XSSFWorkbook(f);
-			for(int i=0;i<toTeste.getSheet("Metrics").getLastRowNum();i++) {
-				for(int j=0;j<toTeste.getSheet("Metrics").getRow(i).getLastCellNum();j++) {
-					if(!toTeste.getSheet("Metrics").getRow(i).getCell(j).toString().equals(expected.getSheet("Metrics").getRow(i).getCell(j).toString())) {
-						equal=false;
+			XSSFWorkbook expected = new XSSFWorkbook(f);
+			for (int i = 0; i < toTeste.getSheet("Metrics").getLastRowNum(); i++) {
+				for (int j = 0; j < toTeste.getSheet("Metrics").getRow(i).getLastCellNum(); j++) {
+					if (!toTeste.getSheet("Metrics").getRow(i).getCell(j).toString()
+							.equals(expected.getSheet("Metrics").getRow(i).getCell(j).toString())) {
+						equal = false;
 					}
 				}
-				
+
 			}
-		} catch (FileNotFoundException e) {} catch (IOException e) {
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 		}
-		
-		
+
 		assertTrue(equal);
-		
+
 	}
-	
-	
+
 }

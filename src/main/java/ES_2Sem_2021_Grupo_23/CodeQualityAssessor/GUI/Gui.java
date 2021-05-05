@@ -20,7 +20,7 @@ import java.awt.Font;
 
 /**
  * 
- * @author Pedro Trincheiras and Bernardo Várzea
+ * @author Pedro Trincheiras and Bernardo Vï¿½rzea
  *
  */
 
@@ -56,13 +56,13 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton ExportPageButton;
 	private JButton ImportPageButton;
 	private JButton RulesPageButton;
-	
+
 	private Rules_Storage rules;
 	private String crname;
 	private String crule;
 
 	public Gui() {
-		
+
 		rules = new Rules_Storage();
 
 		JPanel Menu = new JPanel();
@@ -160,7 +160,7 @@ public class Gui extends JFrame implements ActionListener {
 		changeRuleLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		changeRuleLabel.setBounds(10, 108, 64, 24);
 		Rules.add(changeRuleLabel);
-		
+
 		ruleStatusLabel = new JLabel("");
 		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ruleStatusLabel.setBounds(140, 304, 186, 24);
@@ -315,9 +315,10 @@ public class Gui extends JFrame implements ActionListener {
 			String rule = rule_input.getText();
 			if (!rname.equals("") && !rule.equals("")) {
 				if (change_rule) {
-					if(!rname.equals(crname)) {
+					if (!rname.equals(crname)) {
 						rules.changeRuleName(crname, rname);
-					} if(!rule.equals(crule)) {
+					}
+					if (!rule.equals(crule)) {
 						rules.changeRule(rname, rule);
 					}
 					change_rule = false;
@@ -382,7 +383,7 @@ public class Gui extends JFrame implements ActionListener {
 			refreshRuleList();
 		}
 	}
-	
+
 	private void refreshRuleList() {
 		rule_list.removeActionListener(this);
 		rule_list.removeAllItems();
