@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -12,8 +13,6 @@ import groovy.lang.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
-
-import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
 public class CodeSmell_Editor {
 	
@@ -32,6 +31,10 @@ public class CodeSmell_Editor {
 	 */
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
 			throws IOException {
+
+		if (!ruleName.toLowerCase().contains("class") && !ruleName.toLowerCase().contains("method"))
+			throw new InputMismatchException();
+
 		List<Pair<String, Boolean>> list = new ArrayList<Pair<String, Boolean>>();
 
 		ruleName = ruleName.toLowerCase();
@@ -41,7 +44,7 @@ public class CodeSmell_Editor {
 			if (ruleName.contains("method")) {
 				for (int i = 1; i < workbook.getSheet("Metrics").getLastRowNum(); i++) {
 
-					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString();
+					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString().split("\\.")[0];
 
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
 					int LOC_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(5).getNumericCellValue();
@@ -70,8 +73,6 @@ public class CodeSmell_Editor {
 				}
 			}
 
-		} catch (NumberFormatException e) {
-			System.out.println(e);
 		}
 		return list;
 	}
@@ -120,7 +121,7 @@ public class CodeSmell_Editor {
 	 * @return Boolean -> that evaluates if the rule is a valid rule or not
 	 */
 	public static Boolean rule_Evaluator(String rule) {
-		Pattern pattern = Pattern.compile("^[A-Za-z><=\s0-9()_&|]*$");
+		Pattern pattern = Pattern.compile("^[A-Za-z><=\s0-9()_&|]*");
 		return pattern.matcher(rule).matches();
 	}
 }
