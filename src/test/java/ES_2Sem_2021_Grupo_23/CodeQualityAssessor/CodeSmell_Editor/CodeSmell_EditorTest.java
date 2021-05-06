@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import javax.script.ScriptException;
-
 import org.junit.jupiter.api.Test;
 
 import com.github.javaparser.utils.Pair;
@@ -34,7 +32,7 @@ class CodeSmell_EditorTest {
 	}
 	
 	@Test
-	void getCodeSmellsResultsForClass() throws ScriptException, IOException {
+	void getCodeSmellsResultsForClass() throws IOException {
 		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
 		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
 		expectedList.add(new Pair<String, Boolean>("Attribute", false));
@@ -58,7 +56,7 @@ class CodeSmell_EditorTest {
 	}
 	
 	@Test
-	void getCodeSmellsResultsForMethod() throws ScriptException, IOException {
+	void getCodeSmellsResultsForMethod() throws IOException {
 		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "Method", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
 		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
 		expectedList.add(new Pair<String, Boolean>("1.0", false));
