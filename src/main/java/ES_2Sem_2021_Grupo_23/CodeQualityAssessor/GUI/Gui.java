@@ -1,14 +1,11 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +22,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -42,11 +38,6 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Gene
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
-/**
- * 
- * @author Pedro Trincheiras and Bernardo V�rzea and Filipe Barroso
- *
- */
 
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7448241899663378705L;
@@ -122,6 +113,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel QFPtext;
 	private JLabel QFNtext;
 	private JLabel Qwarning_import;
+	
 
 	public Gui() {
 

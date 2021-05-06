@@ -17,12 +17,12 @@ import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinte
 
 public class LOC_Method {
 
-	
 	/**
 	 * Receives a file and counts the methods of the classes in that file
 	 * 
 	 * @param file - to count methods in classes
-	 * @return contains the name of the class and the number of methods of that class
+	 * @return contains the name of the class and the number of methods of that
+	 *         class
 	 */
 	public static List<Triplet<String, String, Integer>> getLOC_Method(File file) {
 		List<Triplet<String, String, Integer>> methods = new ArrayList<Triplet<String, String, Integer>>();
@@ -36,13 +36,14 @@ public class LOC_Method {
 		}
 		return methods;
 	}
-	
-	
+
 	/**
-	 * Counts the number of lines of every method and constructor in a class/interface
+	 * Counts the number of lines of every method and constructor in a
+	 * class/interface
 	 * 
 	 * @param coid - a class/interface
-	 * @return number of lines of every method and constructor of the class/interface (coid)
+	 * @return number of lines of every method and constructor of the
+	 *         class/interface (coid)
 	 */
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Triplet<String, String, Integer>>> {
 
@@ -51,14 +52,18 @@ public class LOC_Method {
 			super.visit(coid, collector);
 			List<MethodDeclaration> methods = coid.getMethods();
 			List<ConstructorDeclaration> constructors = coid.getConstructors();
-			for(ConstructorDeclaration cd : constructors) {
-				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),cd.getDeclarationAsString(false, false, false), LexicalPreservingPrinter.print(cd).split("\n").length));
+			for (ConstructorDeclaration cd : constructors) {
+				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),
+						cd.getDeclarationAsString(false, false, false),
+						LexicalPreservingPrinter.print(cd).split("\n").length));
 			}
-			for(MethodDeclaration md : methods) {
+			for (MethodDeclaration md : methods) {
 				String method = md.getDeclarationAsString(false, false, false);
-				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),method.substring(method.indexOf(" ") + 1 ,method.length()), LexicalPreservingPrinter.print(md).split("\n").length));
+				collector.add(new Triplet<String, String, Integer>(coid.getNameAsString(),
+						method.substring(method.indexOf(" ") + 1, method.length()),
+						LexicalPreservingPrinter.print(md).split("\n").length));
 			}
 		}
-		
-	}	
+
+	}
 }

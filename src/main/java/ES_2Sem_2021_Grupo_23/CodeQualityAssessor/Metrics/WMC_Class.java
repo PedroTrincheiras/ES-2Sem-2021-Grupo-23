@@ -26,10 +26,13 @@ import com.github.javaparser.utils.Pair;
 public class WMC_Class {
 
 	/**
-	 * Receives a file and counts the number of if, for, forEach, while, and cases of the classes/interfaces in that file
+	 * Receives a file and counts the number of if, for, forEach, while, and cases
+	 * of the classes/interfaces in that file
 	 * 
-	 * @param file - to count the number of if, for, forEach, while, and cases in classes/interfaces
-	 * @return contains the name of the class and the number of if, for, forEach, while, and cases of the class/interface
+	 * @param file - to count the number of if, for, forEach, while, and cases in
+	 *             classes/interfaces
+	 * @return contains the name of the class and the number of if, for, forEach,
+	 *         while, and cases of the class/interface
 	 */
 	public static List<Pair<String, Integer>> getWMC(File file) {
 		List<Pair<String, Integer>> classes = new ArrayList<Pair<String, Integer>>();
@@ -42,12 +45,13 @@ public class WMC_Class {
 		}
 		return classes;
 	}
-	
+
 	/**
 	 * Counts the number of if, for, forEach, while, and cases in a class/interface
 	 * 
 	 * @param coid - a class/interface
-	 * @return number of if, for, forEach, while, and cases of the class/interface (coid)
+	 * @return number of if, for, forEach, while, and cases of the class/interface
+	 *         (coid)
 	 */
 	private static int getClassWMC(ClassOrInterfaceDeclaration coid) {
 		List<Node> l = new ArrayList<Node>();
@@ -55,7 +59,6 @@ public class WMC_Class {
 		v.visit(coid, l);
 		return l.size() + coid.getMethods().size() + coid.getConstructors().size();
 	}
-	
 
 	private static class Visitor extends VoidVisitorAdapter<List<Node>> {
 
@@ -82,20 +85,20 @@ public class WMC_Class {
 			super.visit(ws, collector);
 			collector.add(ws);
 		}
-		
+
 		@Override
 		public void visit(SwitchStmt ss, List<Node> collector) {
-		    super.visit(ss, collector);
-		    collector.addAll(ss.getEntries());
+			super.visit(ss, collector);
+			collector.addAll(ss.getEntries());
 
 		}
-		
+
 		@Override
 		public void visit(DoStmt ds, List<Node> collector) {
 			super.visit(ds, collector);
 			collector.add(ds);
 		}
-		
+
 	}
 
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Pair<String, Integer>>> {
