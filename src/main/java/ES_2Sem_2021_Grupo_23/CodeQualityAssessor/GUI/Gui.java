@@ -658,7 +658,7 @@ public class Gui extends JFrame implements ActionListener {
 				} catch (InputMismatchException e1) {
 					Qwarning_import.setForeground(Color.RED);
 					Qwarning_import.setText("Rule must have class or method on its name");
-				} catch (IOException | ScriptException e2) {
+				} catch (IOException e2) {
 					Qwarning_import.setForeground(Color.RED);
 					Qwarning_import.setText("Error Reading the File");
 				} catch(IllegalArgumentException e3) {
