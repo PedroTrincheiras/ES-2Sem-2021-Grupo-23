@@ -3,6 +3,7 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

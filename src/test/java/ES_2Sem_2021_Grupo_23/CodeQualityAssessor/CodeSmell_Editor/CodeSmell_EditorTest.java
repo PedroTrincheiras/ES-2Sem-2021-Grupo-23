@@ -23,7 +23,7 @@ class CodeSmell_EditorTest {
 		Boolean b = CodeSmell_Editor.codeSmellIdentifier("CYCLO_method < 5", 0, 0, 0, 0, 0);
 		assertEquals(b, true);
 	}
-	
+
 	@Test
 	void checkValidRule() {
 		assertThrows(IllegalArgumentException.class,
