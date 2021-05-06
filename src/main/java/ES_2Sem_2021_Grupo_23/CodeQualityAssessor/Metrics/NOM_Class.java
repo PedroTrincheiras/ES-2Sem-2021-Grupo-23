@@ -13,18 +13,14 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
-/**
- * 
- * @author Garcia
- *
- */
+
 public class NOM_Class {
 	
 	/**
 	 * Receives a file and counts the methods of the classes in that file
 	 * 
-	 * @param file - to count methods in classes
-	 * @return contains the name of the class and the number of methods of that class
+	 * @param file -> To count methods in classes
+	 * @return List of pairs that contains the name of the class and the number of methods of that class
 	 */
 	public static List<Pair<String, Integer>> getNOM(File file) {
 		List<Pair<String, Integer>> classes = new ArrayList<Pair<String,Integer>>();
@@ -41,8 +37,8 @@ public class NOM_Class {
 	/**
 	 * Counts the number of methods and constructors in a class/interface
 	 * 
-	 * @param coid - a class/interface
-	 * @return number of methods and constructors of the class/interface (coid)
+	 * @param coid - A class/interface
+	 * @return Number of methods and constructors of the class/interface (coid)
 	 */
 	private static int getNumberMethods(ClassOrInterfaceDeclaration coid) {
 		List<MethodDeclaration> methods = coid.getMethods();

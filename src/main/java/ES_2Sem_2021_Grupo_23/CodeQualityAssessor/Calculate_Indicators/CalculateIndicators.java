@@ -1,9 +1,11 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.script.ScriptException;
@@ -14,22 +16,23 @@ import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 
-/**
- * @author tomas,diogo mano
- *
- */
 public class CalculateIndicators {
+	
 	/**
-	 * 
+	 * Open the xlsx file passed in the directory and search in the first line for the column with name equal to rulename,
+	 * apply the rule to each line of the file and compare the result with the result inserted manually by the user
 	 * @param directory
 	 * @param rule
 	 * @param ruleName
-	 * @return the indicators for each methodid or classname, in case the rule doesnt exists in the xlsx file return null
+	 * @return list of pairs <String,String>, if the rule doesnt exists in the xlsx file return null
 	 * @throws IOException
 	 * @throws ScriptException
 	 */
-
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException, ScriptException {
+		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class") ) {
+			throw new InputMismatchException();
+		}
+		
 		List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
 
 		FileInputStream f = new FileInputStream(new File(directory));
@@ -42,7 +45,7 @@ public class CalculateIndicators {
 			}
 			//return null if the rulename dont exist in the xlsx file
 			if(column==0)return null;
-			if (ruleName.contains("method")) {
+			if (ruleName.toLowerCase().contains("method")) {
 				for (int i = 1; i < workbook.getSheet("Metrics").getLastRowNum(); i++) {
 					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString();
 
@@ -84,10 +87,10 @@ public class CalculateIndicators {
 		return list;
 	}
 	/**
-	 * 
+	 * Receive a list of pairs and compare the first element of each pair with the string compare
 	 * @param list
 	 * @param compare
-	 * @return true if the list contains already in th first element of the pair a string equal to string compare
+	 * @return true if the string compare exist in the list
 	 */
 	public static boolean containFirstElement(List<Pair<String, String>> list, String compare) {
 		for(Pair<String, String> l : list) {
@@ -97,10 +100,10 @@ public class CalculateIndicators {
 	}
 	
 	
-	/** receive a list of pairs of string where first element is the methodid or classename and the second is the indicator(VP,FP,VN,FN)
-	 * and return of presences for each indicator
+	/** 
+	 * Count the presences of each indicator(VP,FP,VN,FN) 
 	 * @param list
-	 * @return
+	 * @return a list of pairs where the first element of the pair is the indicator and second is the number of presences
 	 */
 	public static List<Pair<String,Integer>> countIndicators(List<Pair<String, String>> list){
 		List<Pair<String,Integer>> result_list=new ArrayList<>();
