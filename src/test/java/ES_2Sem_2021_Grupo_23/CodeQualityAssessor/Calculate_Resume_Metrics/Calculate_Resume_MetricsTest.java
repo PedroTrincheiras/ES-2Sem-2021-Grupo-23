@@ -16,7 +16,8 @@ class Calculate_Resume_MetricsTest {
 
 	@Test
 	void test() throws IOException {
-		List<Pair<String,Integer>> toCalculate = Calculate_Resume_Metrics.readXLSX("jasmlFiles/jasmlFiles_metrics.xlsx");
+		List<Pair<String, Integer>> toCalculate = Calculate_Resume_Metrics
+				.readXLSX("jasmlFiles/jasmlFiles_metrics.xlsx");
 		List<Pair<String, Integer>> expectedCalculateMetrics = new ArrayList<Pair<String, Integer>>();
 		expectedCalculateMetrics.add(new Pair<String, Integer>("Number Of Packages", 5));
 		expectedCalculateMetrics.add(new Pair<String, Integer>("Number Of Classes", 46));
@@ -24,11 +25,11 @@ class Calculate_Resume_MetricsTest {
 		expectedCalculateMetrics.add(new Pair<String, Integer>("Number Of Lines", 4227));
 		assertEquals(expectedCalculateMetrics, toCalculate);
 	}
-	
+
 	@Test
-	void Undefined(){
+	void Undefined() {
 		String file = "Undefined";
-		assertThrows(IOException.class, ()->Calculate_Resume_Metrics.readXLSX(file));
+		assertThrows(IOException.class, () -> Calculate_Resume_Metrics.readXLSX(file));
 	}
 
 }

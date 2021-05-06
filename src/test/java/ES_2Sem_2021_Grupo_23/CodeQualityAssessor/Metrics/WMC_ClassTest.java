@@ -16,31 +16,31 @@ class WMC_ClassTest {
 	void GrammarException() {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\GrammerException.java");
 		List<Pair<String, Integer>> wmc = WMC_Class.getWMC(file);
-		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String,Integer>>();
+		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String, Integer>>();
 		expectedWMC.add(new Pair<String, Integer>("GrammerException", 4));
 		assertEquals(expectedWMC, wmc);
 	}
-	
+
 	@Test
 	void SourceCodeParser() {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\SourceCodeParser.java");
 		List<Pair<String, Integer>> wmc = WMC_Class.getWMC(file);
-		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String,Integer>>();
+		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String, Integer>>();
 		expectedWMC.add(new Pair<String, Integer>("OpcodeWrapper", 2));
 		expectedWMC.add(new Pair<String, Integer>("LabeledInstructions", 1));
 		expectedWMC.add(new Pair<String, Integer>("SourceCodeParser", 300));
 		assertEquals(expectedWMC, wmc);
 	}
-	
+
 	@Test
 	void ParsingException() {
 		File file = new File("jasmlFiles\\com\\jasml\\compiler\\ParsingException.java");
 		List<Pair<String, Integer>> wmc = WMC_Class.getWMC(file);
-		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String,Integer>>();
+		List<Pair<String, Integer>> expectedWMC = new ArrayList<Pair<String, Integer>>();
 		expectedWMC.add(new Pair<String, Integer>("ParsingException", 13));
 		assertEquals(expectedWMC, wmc);
 	}
-	
+
 	@Test
 	void Undefined() {
 		File file = new File("Undefined");
