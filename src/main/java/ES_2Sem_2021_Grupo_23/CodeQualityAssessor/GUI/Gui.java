@@ -170,52 +170,6 @@ public class Gui extends JFrame implements ActionListener {
 		QualityPageButton.setBounds(310, 0, 65, 36);
 		Menu.add(QualityPageButton);
 
-		CSResults = new JPanel();
-		CSResults.setBackground(Color.WHITE);
-		CSResults.setBounds(0, 0, 484, 461);
-		getContentPane().add(CSResults);
-		CSResults.setLayout(null);
-		CSResults.setVisible(false);
-
-		CSRestultsLabel = new JLabel("Code Smells Results");
-		CSRestultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		CSRestultsLabel.setBounds(171, 60, 142, 24);
-		CSResults.add(CSRestultsLabel);
-
-		directoryButton = new JButton("Select Directory");
-		directoryButton.setForeground(Color.WHITE);
-		directoryButton.setBorder(null);
-		directoryButton.addActionListener(this);
-		directoryButton.setBackground(new Color(52, 73, 94));
-		directoryButton.setBounds(324, 110, 150, 35);
-		CSResults.add(directoryButton);
-
-		fileDirectory = new JTextField();
-		fileDirectory.setBorder(new LineBorder(new Color(189, 195, 199)));
-		fileDirectory.setBackground(Color.WHITE);
-		fileDirectory.setBounds(10, 110, 304, 35);
-		CSResults.add(fileDirectory);
-
-		showResults = new JButton("Results");
-		showResults.setForeground(Color.WHITE);
-		showResults.setBorder(null);
-		showResults.addActionListener(this);
-		showResults.setBackground(new Color(52, 73, 94));
-		showResults.setBounds(10, 385, 234, 35);
-		CSResults.add(showResults);
-
-		JLabel lblNewLabel = new JLabel("Select Code Smells");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(45, 168, 150, 24);
-		CSResults.add(lblNewLabel);
-
-		JScrollPane csListScroll = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		codeSmellsList = new JList<>(l1);
-		csListScroll.setBounds(26, 213, 122, 142);
-		CSResults.add(csListScroll);
-		csListScroll.setViewportView(codeSmellsList);
-
 		Rules = new JPanel();
 		Rules.setBackground(Color.WHITE);
 		Rules.setBounds(0, 0, 484, 461);
@@ -277,7 +231,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		ruleStatusLabel = new JLabel("");
 		ruleStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		ruleStatusLabel.setBounds(140, 337, 186, 24);
+		ruleStatusLabel.setBounds(10, 337, 464, 24);
 		Rules.add(ruleStatusLabel);
 
 		removeButton = new JButton("Remove Selected Rule");
@@ -293,6 +247,52 @@ public class Gui extends JFrame implements ActionListener {
 		lblRuleNameMust.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRuleNameMust.setBounds(10, 54, 464, 24);
 		Rules.add(lblRuleNameMust);
+
+		CSResults = new JPanel();
+		CSResults.setBackground(Color.WHITE);
+		CSResults.setBounds(0, 0, 484, 461);
+		getContentPane().add(CSResults);
+		CSResults.setLayout(null);
+		CSResults.setVisible(false);
+
+		CSRestultsLabel = new JLabel("Code Smells Results");
+		CSRestultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		CSRestultsLabel.setBounds(171, 60, 142, 24);
+		CSResults.add(CSRestultsLabel);
+
+		directoryButton = new JButton("Select Directory");
+		directoryButton.setForeground(Color.WHITE);
+		directoryButton.setBorder(null);
+		directoryButton.addActionListener(this);
+		directoryButton.setBackground(new Color(52, 73, 94));
+		directoryButton.setBounds(324, 110, 150, 35);
+		CSResults.add(directoryButton);
+
+		fileDirectory = new JTextField();
+		fileDirectory.setBorder(new LineBorder(new Color(189, 195, 199)));
+		fileDirectory.setBackground(Color.WHITE);
+		fileDirectory.setBounds(10, 110, 304, 35);
+		CSResults.add(fileDirectory);
+
+		showResults = new JButton("Results");
+		showResults.setForeground(Color.WHITE);
+		showResults.setBorder(null);
+		showResults.addActionListener(this);
+		showResults.setBackground(new Color(52, 73, 94));
+		showResults.setBounds(10, 385, 234, 35);
+		CSResults.add(showResults);
+
+		JLabel lblNewLabel = new JLabel("Select Code Smells");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(45, 168, 150, 24);
+		CSResults.add(lblNewLabel);
+
+		JScrollPane csListScroll = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		codeSmellsList = new JList<>(l1);
+		csListScroll.setBounds(26, 213, 122, 142);
+		CSResults.add(csListScroll);
+		csListScroll.setViewportView(codeSmellsList);
 
 		Quality = new JPanel();
 		Quality.setBackground(Color.WHITE);
@@ -508,9 +508,12 @@ public class Gui extends JFrame implements ActionListener {
 		String[][] finalData = rows.stream().map(arr -> arr.toArray(String[]::new)).toArray(String[][]::new);
 		results = new JTable(finalData, columnNames.toArray());
 
-//		scrollPane = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); scrollPane.setBounds(274,168, 200, 270); CSResults.add(scrollPane);
-//		scrollPane.setViewportView(results);
+		scrollPane = new JScrollPane(results, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		results.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPane.setBounds(274, 168, 200, 270);
+		CSResults.add(scrollPane);
+		scrollPane.setViewportView(results);
 
 	}
 
@@ -578,7 +581,7 @@ public class Gui extends JFrame implements ActionListener {
 		if (e.getSource() == showResults) {
 			getCodeSmells();
 		}
-		
+
 		if (e.getSource() == removeButton) {
 			rules.removeRule(rule_list.getSelectedItem().toString());
 			refreshRuleList(rule_list);
@@ -661,7 +664,7 @@ public class Gui extends JFrame implements ActionListener {
 				} catch (IOException e2) {
 					Qwarning_import.setForeground(Color.RED);
 					Qwarning_import.setText("Error Reading the File");
-				} catch(IllegalArgumentException e3) {
+				} catch (IllegalArgumentException e3) {
 					Qwarning_import.setForeground(Color.RED);
 					Qwarning_import.setText("Rule Not Found on File");
 				}
@@ -672,6 +675,11 @@ public class Gui extends JFrame implements ActionListener {
 			String rname = rule_name.getText();
 			String rule = rule_input.getText();
 			if (!rname.equals("") && !rule.equals("")) {
+				if (!rname.toLowerCase().contains("class") || !rname.toLowerCase().contains("method")) {
+					ruleStatusLabel.setText("Rule name must have class or method");
+					ruleStatusLabel.setForeground(Color.red);
+					return;
+				}
 				if (change_rule) {
 					if (!rname.equals(crname)) {
 						rules.changeRuleName(crname, rname);
