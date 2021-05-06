@@ -31,9 +31,8 @@ public class CalculateIndicators {
 	 * @throws IOException
 	 * @throws ScriptException
 	 */
-	public static List<Pair<String, String>> getIndicators(String directory, String rule, String ruleName)
-			throws IOException, ScriptException {
-		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class")) {
+	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException {
+		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class") ) {
 			throw new InputMismatchException();
 		}
 
@@ -41,10 +40,10 @@ public class CalculateIndicators {
 
 		FileInputStream f = new FileInputStream(new File(directory));
 		try (XSSFWorkbook workbook = new XSSFWorkbook(f)) {
-			int column = 0;
-			for (int j = 1; j < workbook.getSheet("Metrics").getRow(0).getLastCellNum(); j++) {
-				if (ruleName.equals(workbook.getSheet("Metrics").getRow(0).getCell(j).toString())) {
-					column = j;
+			int column=0;
+			for(int j=1;j<workbook.getSheet("Metrics").getRow(0).getLastCellNum();j++) {
+				if(ruleName.toLowerCase().equals(workbook.getSheet("Metrics").getRow(0).getCell(j).toString().toLowerCase())){
+					column=j;
 				}
 			}
 			// return null if the rulename dont exist in the xlsx file

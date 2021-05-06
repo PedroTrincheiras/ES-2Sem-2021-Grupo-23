@@ -23,7 +23,7 @@ class CodeSmell_EditorTest {
 		Boolean b = CodeSmell_Editor.codeSmellIdentifier("CYCLO_method < 5", 0, 0, 0, 0, 0);
 		assertEquals(b, true);
 	}
-	
+
 	@Test
 	void checkValidRule() {
 		assertThrows(IllegalArgumentException.class,
@@ -53,6 +53,13 @@ class CodeSmell_EditorTest {
 		expectedList.add(new Pair<String, Boolean>("Attribute_InnerClasses", false));
 		expectedList.add(new Pair<String, Boolean>("LineNumber", false));
 		assertEquals(list.subList(0, 10), expectedList);
+	}
+
+	@Test
+	void getCodeSmellsResultsRuleNameError() throws IOException {
+		assertThrows(InputMismatchException.class,
+				() -> CodeSmell_Editor.getCodeSmellsResults("WMC_class> 50 OR NOM_class> 10", "test",
+						"jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx"));
 	}
 
 	@Test

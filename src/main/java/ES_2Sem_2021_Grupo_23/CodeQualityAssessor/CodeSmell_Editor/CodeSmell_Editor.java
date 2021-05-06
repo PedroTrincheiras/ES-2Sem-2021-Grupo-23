@@ -31,19 +31,17 @@ public class CodeSmell_Editor {
 	 */
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
 			throws IOException {
-
-		if (!ruleName.toLowerCase().contains("class") && !ruleName.toLowerCase().contains("method"))
+		
+		if(!ruleName.toLowerCase().contains("class") && !ruleName.toLowerCase().contains("method")) 
 			throw new InputMismatchException();
-
+		
 		List<Pair<String, Boolean>> list = new ArrayList<Pair<String, Boolean>>();
-
-		ruleName = ruleName.toLowerCase();
 
 		FileInputStream f = new FileInputStream(new File(fromDirectory));
 		try (XSSFWorkbook workbook = new XSSFWorkbook(f)) {
-			if (ruleName.contains("method")) {
+			if (ruleName.toLowerCase().contains("method")) {
 				for (int i = 1; i < workbook.getSheet("Metrics").getLastRowNum(); i++) {
-
+					
 					String methodID = workbook.getSheet("Metrics").getRow(i).getCell(0).toString().split("\\.")[0];
 
 					int NOM_class = (int) workbook.getSheet("Metrics").getRow(i).getCell(4).getNumericCellValue();
@@ -72,7 +70,6 @@ public class CodeSmell_Editor {
 								codeSmellIdentifier(rule, LOC_method, CYCLO_method, LOC_class, NOM_class, WMC_class)));
 				}
 			}
-
 		}
 		return list;
 	}
