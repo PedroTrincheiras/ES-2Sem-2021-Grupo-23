@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.github.javaparser.utils.Pair;
 
 public class CodeSmell_Editor {
-
+	
 	/**
 	 * Gives the result of the code smell for that class/methodID based on the rule
 	 * that was applied
@@ -116,7 +116,7 @@ public class CodeSmell_Editor {
 	 * @return Boolean -> that evaluates if the rule is a valid rule or not
 	 */
 	public static Boolean rule_Evaluator(String rule) {
-		Pattern pattern = Pattern.compile("^[A-Za-z><=\s0-9()_&|]*$");
+		Pattern pattern = Pattern.compile("^[A-Za-z><=\s0-9()_&|]*");
 		return pattern.matcher(rule).matches();
 	}
 }

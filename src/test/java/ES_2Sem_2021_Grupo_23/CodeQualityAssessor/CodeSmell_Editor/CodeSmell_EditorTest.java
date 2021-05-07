@@ -1,5 +1,6 @@
 package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -23,14 +24,16 @@ class CodeSmell_EditorTest {
 
 	@Test
 	void checkValidRule() {
-		assertThrows(IllegalArgumentException.class , () -> CodeSmell_Editor.getCodeSmellsResults("###", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
+		assertThrows(IllegalArgumentException.class,
+				() -> CodeSmell_Editor.getCodeSmellsResults("$$$", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
 	}
-	
+
 	@Test
 	void checkRule() {
-		assertThrows(MissingPropertyException.class , () -> CodeSmell_Editor.getCodeSmellsResults("sadasdasdasd", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
+		assertThrows(MissingPropertyException.class, () -> CodeSmell_Editor.getCodeSmellsResults("sadasdasdasd",
+				"CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx"));
 	}
-	
+
 	@Test
 	void getCodeSmellsResultsForClass() throws IOException {
 		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);

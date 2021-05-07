@@ -13,17 +13,17 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
-
 public class NOM_Class {
-	
+
 	/**
 	 * Receives a file and counts the methods of the classes in that file
 	 * 
 	 * @param file -> To count methods in classes
-	 * @return List of pairs that contains the name of the class and the number of methods of that class
+	 * @return List of pairs that contains the name of the class and the number of
+	 *         methods of that class
 	 */
 	public static List<Pair<String, Integer>> getNOM(File file) {
-		List<Pair<String, Integer>> classes = new ArrayList<Pair<String,Integer>>();
+		List<Pair<String, Integer>> classes = new ArrayList<Pair<String, Integer>>();
 		try {
 			CompilationUnit cu = StaticJavaParser.parse(file);
 			ClassOrInterface coi = new ClassOrInterface();
@@ -33,7 +33,7 @@ public class NOM_Class {
 		}
 		return classes;
 	}
-	
+
 	/**
 	 * Counts the number of methods and constructors in a class/interface
 	 * 
@@ -45,9 +45,9 @@ public class NOM_Class {
 		List<ConstructorDeclaration> constructors = coid.getConstructors();
 		return methods.size() + constructors.size();
 	}
-	
+
 	private static class ClassOrInterface extends VoidVisitorAdapter<List<Pair<String, Integer>>> {
-		
+
 		@Override
 		public void visit(ClassOrInterfaceDeclaration coid, List<Pair<String, Integer>> collector) {
 			super.visit(coid, collector);
