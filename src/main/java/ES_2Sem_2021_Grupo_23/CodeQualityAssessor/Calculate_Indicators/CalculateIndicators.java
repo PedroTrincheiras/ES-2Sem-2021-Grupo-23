@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import javax.script.ScriptException;
-
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
@@ -29,7 +27,6 @@ public class CalculateIndicators {
 	 * @return list of pairs <String,String>, if the rule doesnt exists in the xlsx
 	 *         file return null
 	 * @throws IOException
-	 * @throws ScriptException
 	 */
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException {
 		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class") ) {

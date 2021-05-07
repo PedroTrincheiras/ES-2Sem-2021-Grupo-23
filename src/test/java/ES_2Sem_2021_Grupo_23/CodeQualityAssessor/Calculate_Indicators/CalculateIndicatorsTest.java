@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import javax.script.ScriptException;
-
 import org.junit.jupiter.api.Test;
+
 import com.github.javaparser.utils.Pair;
 
 class CalculateIndicatorsTest {
 
 	@Test
-	void getIndicatorsClassTest() throws IOException, ScriptException {
+	void getIndicatorsClassTest() throws IOException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "toTestClass";
@@ -72,7 +71,7 @@ class CalculateIndicatorsTest {
 	}
 
 	@Test
-	void getIndicatorsMethodTest() throws IOException, ScriptException {
+	void getIndicatorsMethodTest() throws IOException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "toTestMethod";
@@ -92,7 +91,7 @@ class CalculateIndicatorsTest {
 	}
 
 	@Test
-	void countIndicatorsTest() throws IOException, ScriptException {
+	void countIndicatorsTest() throws IOException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "toTestClass";
@@ -107,7 +106,7 @@ class CalculateIndicatorsTest {
 	}
 
 	@Test
-	void ruleNameError() throws IOException, ScriptException {
+	void ruleNameError() throws IOException {
 		String directory = "jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx";
 		String rule = "WMC_class> 50 OR NOM_class> 10";
 		String ruleName = "test";

@@ -27,7 +27,6 @@ public class CodeSmell_Editor {
 	 *         the methodID (depends on the rule name) and a boolean that represents
 	 *         if that class or method for that rule is a CodeSmell or not
 	 * @throws IOException
-	 * @throws ScriptException
 	 */
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
 			throws IOException {
@@ -84,7 +83,6 @@ public class CodeSmell_Editor {
 	 * @param NOM_class    -> value of the NOM_class
 	 * @param WMC_class    -> value of the WMC_class
 	 * @return Boolean -> represents if there is a code smell or not
-	 * @throws ScriptException
 	 */
 	public static Boolean codeSmellIdentifier(String rule, int LOC_method, int CYCLO_method, int LOC_class,
 			int NOM_class, int WMC_class) {

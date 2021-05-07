@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import javax.script.ScriptException;
-
 import org.junit.jupiter.api.Test;
 
 import com.github.javaparser.utils.Pair;
@@ -37,11 +35,9 @@ class CodeSmell_EditorTest {
 	}
 
 	@Test
-	void getCodeSmellsResultsForClass() throws ScriptException, IOException {
-		List<Pair<String, Boolean>> list = CodeSmell_Editor
-				.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx")
-				.subList(0, 10);
-		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String, Boolean>>();
+	void getCodeSmellsResultsForClass() throws IOException {
+		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "CLASS", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
+		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
 		expectedList.add(new Pair<String, Boolean>("Attribute", false));
 		expectedList.add(new Pair<String, Boolean>("ExceptionTableItem", false));
 		expectedList.add(new Pair<String, Boolean>("Opcode", false));
@@ -56,27 +52,27 @@ class CodeSmell_EditorTest {
 	}
 
 	@Test
-	void getCodeSmellsResultsForMethod() throws ScriptException, IOException {
-		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10",
-				"Method", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
-		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String, Boolean>>();
-		expectedList.add(new Pair<String, Boolean>("1", false));
-		expectedList.add(new Pair<String, Boolean>("2", false));
-		expectedList.add(new Pair<String, Boolean>("3", false));
-		expectedList.add(new Pair<String, Boolean>("4", false));
-		expectedList.add(new Pair<String, Boolean>("5", false));
-		expectedList.add(new Pair<String, Boolean>("6", false));
-		expectedList.add(new Pair<String, Boolean>("7", false));
-		expectedList.add(new Pair<String, Boolean>("8", false));
-		expectedList.add(new Pair<String, Boolean>("9", false));
-		expectedList.add(new Pair<String, Boolean>("10", false));
-		assertEquals(list, expectedList);
-	}
-
-	@Test
 	void getCodeSmellsResultsRuleNameError() throws IOException {
 		assertThrows(InputMismatchException.class,
 				() -> CodeSmell_Editor.getCodeSmellsResults("WMC_class> 50 OR NOM_class> 10", "test",
 						"jasmlFiles/jasmlFiles_metrics_with_indicators.xlsx"));
 	}
+	
+	@Test
+	void getCodeSmellsResultsForMethod() throws IOException {
+		List<Pair<String, Boolean>> list = CodeSmell_Editor.getCodeSmellsResults("WMC_class > 50 Or NOM_class > 10", "Method", "jasmlFiles/jasmlFiles_metrics.xlsx").subList(0, 10);
+		List<Pair<String, Boolean>> expectedList = new ArrayList<Pair<String,Boolean>>();
+		expectedList.add(new Pair<String, Boolean>("1.0", false));
+		expectedList.add(new Pair<String, Boolean>("2.0", false));
+		expectedList.add(new Pair<String, Boolean>("3.0", false));
+		expectedList.add(new Pair<String, Boolean>("4.0", false));
+		expectedList.add(new Pair<String, Boolean>("5.0", false));
+		expectedList.add(new Pair<String, Boolean>("6.0", false));
+		expectedList.add(new Pair<String, Boolean>("7.0", false));
+		expectedList.add(new Pair<String, Boolean>("8.0", false));
+		expectedList.add(new Pair<String, Boolean>("9.0", false));
+		expectedList.add(new Pair<String, Boolean>("10.0", false));
+		assertEquals(list, expectedList);
+	}
+
 }
