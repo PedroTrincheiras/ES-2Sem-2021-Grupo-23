@@ -125,6 +125,7 @@ public class CalculateIndicators {
 	 *         and second is the number of presences
 	 */
 	public static List<Pair<String, Integer>> countIndicators(List<Pair<String, String>> list) {
+		if(list==null) throw new IllegalArgumentException();
 		List<Pair<String, Integer>> result_list = new ArrayList<>();
 		int vp = 0, fp = 0, vn = 0, fn = 0;
 		for (Pair<String, String> l : list) {
