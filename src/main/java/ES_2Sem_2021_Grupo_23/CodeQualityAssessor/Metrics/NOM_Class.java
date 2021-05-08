@@ -13,6 +13,9 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
+/**
+* A Class with methods to calculate the metric NOM_Class
+*/
 public class NOM_Class {
 
 	/**

@@ -15,6 +15,9 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
 
+/**
+* A Class with methods to calculate the metric LOC_Method
+*/
 public class LOC_Method {
 
 	/**

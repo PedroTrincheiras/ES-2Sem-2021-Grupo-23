@@ -21,6 +21,9 @@ import com.github.javaparser.ast.stmt.SwitchStmt;
 import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+/**
+* A Class with methods to calculate the metric CYCLO_method
+*/
 public class CYCLO_method {
 
 	/**

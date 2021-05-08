@@ -7,6 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
+
+/**
+* Rules_Storage is an object with the purpose of keeping and manipulating the rules
+*/
 public class Rules_Storage {
 
 	private HashMap<String, String> rules;
@@ -35,7 +39,7 @@ public class Rules_Storage {
 	/**
 	 * Receives a rule name and return the corresponding rule
 	 * 
-	 * @param String - to search the rule in the Rule_Storage
+	 * @param ruleName to search the rule in the Rule_Storage
 	 * @return the respective rule
 	 */
 	public String getRule(String ruleName) {
@@ -45,7 +49,7 @@ public class Rules_Storage {
 	/**
 	 * Receives a rule name and removes it from the database
 	 * 
-	 * @param String - to search the rule in the Rule_Storage
+	 * @param ruleName to search the rule in the Rule_Storage
 	 */
 	public void removeRule(String ruleName) {
 		this.rules.remove(ruleName);
@@ -54,9 +58,9 @@ public class Rules_Storage {
 	/**
 	 * Add a new rule to the Rule_Storage if it doesn't already exists
 	 * 
-	 * @param String - to check if the rule already exists and if not to use as
+	 * @param ruleName to check if the rule already exists and if not to use as
 	 *               hashmap key
-	 * @param String - rule content
+	 * @param rule content of the rule
 	 * @return if the rule already exits return false, else return true
 	 */
 	public boolean addRule(String ruleName, String rule) {
@@ -72,8 +76,8 @@ public class Rules_Storage {
 	/**
 	 * Change a rule name that already exists
 	 * 
-	 * @param String - to get the rule
-	 * @param String - to add as the new key
+	 * @param oldRuleName to get the rule to change
+	 * @param newRuleName to add as the new name for the rule
 	 */
 	public void changeRuleName(String oldRuleName, String newRuleName) {
 		this.rules.put(newRuleName, this.rules.get(oldRuleName));
@@ -83,8 +87,8 @@ public class Rules_Storage {
 	/**
 	 * Change a rule that already exists
 	 * 
-	 * @param String - to get the rule
-	 * @param String - to update as the new rule
+	 * @param ruleName to get the rule
+	 * @param newRule to update as the new rule
 	 */
 	public void changeRule(String ruleName, String newRule) {
 		this.rules.put(ruleName, newRule);
@@ -93,7 +97,7 @@ public class Rules_Storage {
 	/**
 	 * Save the current database
 	 * 
-	 * @throws Exception
+	 * @throws Exception Throws a Exception when can not save the File
 	 */
 	public void saveCurrentDatabase() throws Exception {
 		try {
@@ -109,8 +113,9 @@ public class Rules_Storage {
 	/**
 	 * Load Database
 	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @return return the saved HashMap
+	 * @throws IOException Throws a IOException when can not read the File
+	 * @throws ClassNotFoundException Throws a ClassNotFoundException when the binary object in the file do not match the expected HashMap
 	 */
 	public HashMap<String, String> loadDatabase() throws ClassNotFoundException, IOException {
 		FileInputStream fis = new FileInputStream("rules.dat");

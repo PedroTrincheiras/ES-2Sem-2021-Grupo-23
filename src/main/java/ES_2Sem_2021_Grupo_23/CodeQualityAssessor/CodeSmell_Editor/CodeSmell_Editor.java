@@ -14,6 +14,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
 
+/**
+* A Class with methods to evaluate and apply rules
+*/
 public class CodeSmell_Editor {
 	
 	/**
@@ -26,7 +29,7 @@ public class CodeSmell_Editor {
 	 * @return List of pairs that contain a string that represents the class name or
 	 *         the methodID (depends on the rule name) and a boolean that represents
 	 *         if that class or method for that rule is a CodeSmell or not
-	 * @throws IOException
+	 * @throws IOException Throws IOException if can't read the file
 	 */
 	public static List<Pair<String, Boolean>> getCodeSmellsResults(String rule, String ruleName, String fromDirectory)
 			throws IOException {
