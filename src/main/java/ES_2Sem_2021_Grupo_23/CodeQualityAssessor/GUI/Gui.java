@@ -681,7 +681,7 @@ public class Gui extends JFrame implements ActionListener {
 			String rname = rule_name.getText();
 			String rule = rule_input.getText();
 			if (!rname.equals("") && !rule.equals("")) {
-				if (!rname.toLowerCase().contains("class") || !rname.toLowerCase().contains("method")) {
+				if (!rname.toLowerCase().contains("class") && !rname.toLowerCase().contains("method")) {
 					ruleStatusLabel.setText("Rule name must have class or method");
 					ruleStatusLabel.setForeground(Color.red);
 					return;
