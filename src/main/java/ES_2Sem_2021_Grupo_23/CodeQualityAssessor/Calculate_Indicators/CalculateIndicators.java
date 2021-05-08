@@ -14,6 +14,9 @@ import com.github.javaparser.utils.Pair;
 
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.CodeSmell_Editor.CodeSmell_Editor;
 
+/**
+* A Class with methods to Calculate indicators and compare the result with the values inserted by a user in a xlsx file
+*/
 public class CalculateIndicators {
 
 	/**
@@ -21,12 +24,12 @@ public class CalculateIndicators {
 	 * the column with name equal to rulename, apply the rule to each line of the
 	 * file and compare the result with the result inserted manually by the user
 	 * 
-	 * @param directory
-	 * @param rule
-	 * @param ruleName
-	 * @return list of pairs <String,String>, if the rule doesnt exists in the xlsx
+	 * @param directory The directory of the file
+	 * @param rule      The rule 
+	 * @param ruleName  The rule name
+	 * @return list of pairs String and String, if the rule doesn't exists in the xlsx
 	 *         file return null
-	 * @throws IOException
+	 * @throws IOException Throws IOException if can't read the file
 	 */
 	public static List<Pair<String, String>> getIndicators(String directory,String rule,String ruleName) throws IOException {
 		if (!ruleName.toLowerCase().contains("method") && !ruleName.toLowerCase().contains("class") ) {
@@ -105,8 +108,8 @@ public class CalculateIndicators {
 	 * Receive a list of pairs and compare the first element of each pair with the
 	 * string compare
 	 * 
-	 * @param list
-	 * @param compare
+	 * @param list List of pairs to compare the first element with the compare parameter
+	 * @param compare String to be compared with the first element of every pair in the list given in the list parameter
 	 * @return true if the string compare exist in the list
 	 */
 	public static boolean containFirstElement(List<Pair<String, String>> list, String compare) {
@@ -120,7 +123,7 @@ public class CalculateIndicators {
 	/**
 	 * Count the presences of each indicator(VP,FP,VN,FN)
 	 * 
-	 * @param list
+	 * @param list List to count the number of VP FP VN and FN
 	 * @return a list of pairs where the first element of the pair is the indicator
 	 *         and second is the number of presences
 	 */

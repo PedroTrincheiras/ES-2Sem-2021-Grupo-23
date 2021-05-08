@@ -2,6 +2,9 @@ package ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils;
 
 import java.util.ArrayList;
 
+/**
+* A array list without a specific size
+*/
 public class ArrayListAnySize<E> extends ArrayList<E>{
    
 	private static final long serialVersionUID = 1L;

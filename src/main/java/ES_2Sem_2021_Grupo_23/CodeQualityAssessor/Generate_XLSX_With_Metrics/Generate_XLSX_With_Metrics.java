@@ -43,9 +43,9 @@ public class Generate_XLSX_With_Metrics {
 	 * Receive 2 directory one is the directory of the project and the other to save
 	 * the file, and call the function generateXLSX
 	 * 
-	 * @param fromdirectory
-	 * @param todirectory
-	 * @throws IOException
+	 * @param fromdirectory Directory to read 
+	 * @param todirectory Directory to export the file
+	 * @throws IOException Throws IOException if can't read or write the file 
 	 */
 	public static void generateXLSX(String fromdirectory, String todirectory) throws IOException {
 		Map<Integer, Object[]> data = loadDirectory(fromdirectory);
@@ -58,9 +58,9 @@ public class Generate_XLSX_With_Metrics {
 	 * Search on directory all files .java and load the metrics and return a map
 	 * with data from metrics
 	 * 
-	 * @param directory
+	 * @param directory Directory to read
 	 * @return Map to be written on the workbook
-	 * @throws IOException
+	 * @throws IOException Throws IOException if can't read the directory
 	 */
 	public static Map<Integer, Object[]> loadDirectory(String directory) throws IOException {
 		Map<Integer, Object[]> data = new TreeMap<Integer, Object[]>();
@@ -113,7 +113,7 @@ public class Generate_XLSX_With_Metrics {
 	/**
 	 * Build workbook with data from map data
 	 * 
-	 * @param data
+	 * @param data Data to write on XLSX 
 	 * @return workbook with all the data
 	 */
 	public static XSSFWorkbook generateWorkbook(Map<Integer, Object[]> data) {

@@ -19,10 +19,8 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.Pair;
 
 /**
- * 
- * @author Pedro Trincheiras
- *
- */
+* A Class with methods to calculate the metric WMC_Class
+*/
 public class WMC_Class {
 
 	/**

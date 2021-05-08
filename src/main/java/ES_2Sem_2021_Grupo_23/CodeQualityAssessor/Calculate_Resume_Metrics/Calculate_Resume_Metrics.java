@@ -10,6 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.utils.Pair;
 
+/**
+* A class where are implemented a method to read a xlsx file and return a resume of the metrics
+*/
 public class Calculate_Resume_Metrics {
 
 	/**
@@ -21,7 +24,7 @@ public class Calculate_Resume_Metrics {
 	 * @return a list of pairs with a string(number of packages, the number of
 	 *         classes, the number of methods or the number of lines) and a integer
 	 *         with the result.
-	 * @throws IOException
+	 * @throws IOException Throws IOException if can't read the file
 	 */
 	public static List<Pair<String, Integer>> readXLSX(String fromDirectory) throws IOException {
 		List<String> classes = new ArrayList<String>();

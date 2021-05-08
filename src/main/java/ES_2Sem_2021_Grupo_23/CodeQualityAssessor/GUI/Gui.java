@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.InputMismatchException;
-
-import javax.script.ScriptException;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -39,8 +37,13 @@ import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Generate_XLSX_With_Metrics.Gene
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Rules.Rules_Storage;
 import ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Utils.ArrayListAnySize;
 
+
+/**
+* The class with the graphical interface of the project 
+*/
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7448241899663378705L;
+	
 	private JButton choose;
 	private JTextField cDirectory;
 	private JButton export;
@@ -115,6 +118,9 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel Qwarning_import;
 	private JLabel lblRuleNameMust;
 
+	/**
+	 * Constructor for GUI
+	 */
 	public Gui() {
 
 		rules = new Rules_Storage();
@@ -846,6 +852,9 @@ public class Gui extends JFrame implements ActionListener {
 		rlist.setSelectedIndex(-1);
 	}
 
+	/**
+	 * The main of the program
+	 */
 	public static void main(String[] args) {
 		Gui gui = new Gui();
 		gui.setSize(500, 500);
