@@ -852,8 +852,10 @@ public class Gui extends JFrame implements ActionListener {
 		rlist.setSelectedIndex(-1);
 	}
 
+
 	/**
 	 * The main of the program
+	 * @param args Parameters given when run the program (NOT IN USE)
 	 */
 	public static void main(String[] args) {
 		Gui gui = new Gui();
