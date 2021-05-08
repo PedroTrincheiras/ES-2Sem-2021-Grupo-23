@@ -8,3 +8,11 @@
 * Bernardo Varzea - 87176
 * Tomás Rodrigues - 87715
 * Diogo Mano - 88091
+
+## Trello 
+### 1º Sprint
+* https://trello.com/b/Mdr4usP3/sprint-1
+### 2º Sprint
+* https://trello.com/b/nQaW3XJV/sprint-2
+### 3º Sprint
+* https://trello.com/b/QvV7k5on/sprint-3
