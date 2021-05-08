@@ -1,0 +1,43 @@
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	warning_import	B22	0/10
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	warning_import	B23	0/9
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	private void getCodeSmells() 	scrollPane	B12	0/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	private void refreshRuleList(JComboBox<java.lang.String>) 	rlist	B1	0/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	private void getCodeSmells() 	results	B12	0/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.String>> getIndicators(java.lang.String, java.lang.String, java.lang.String) throws java.io.IOException	column	B4	0/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.String>> getIndicators(java.lang.String, java.lang.String, java.lang.String) throws java.io.IOException	column	B5	0/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	info	B24	0/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	CSResults	B54	5/35
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Export	B54	5/35
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Import	B54	5/35
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Quality	B54	5/35
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Rules	B54	5/35
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	CSResultsPageButton	B54	5/30
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	ExportPageButton	B54	5/30
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	ImportPageButton	B54	5/30
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	QualityPageButton	B54	5/30
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	RulesPageButton	B54	5/30
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	warning_export	B16	1/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	warning_export	B17	0/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fn	B4	4/6
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fn	B5	3/5
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fn	B7	2/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fn	B9	1/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fn	B11	0/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Qwarning_import	B34	2/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Qwarning_import	B35	1/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	Qwarning_import	B36	0/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vp	B4	2/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vp	B5	1/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fp	B4	3/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fp	B5	2/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	fp	B7	1/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics	public static List<Pair<java.lang.String,java.lang.Integer>> readXLSX(java.lang.String) throws java.io.IOException	numberOfLines	B1	7/9
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics	public static List<Pair<java.lang.String,java.lang.Integer>> readXLSX(java.lang.String) throws java.io.IOException	numberOfLines	B2	4/5
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics	public static List<Pair<java.lang.String,java.lang.Integer>> readXLSX(java.lang.String) throws java.io.IOException	numberOfLines	B3	3/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics	public static List<Pair<java.lang.String,java.lang.Integer>> readXLSX(java.lang.String) throws java.io.IOException	numberOfLines	B4	2/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Resume_Metrics.Calculate_Resume_Metrics	public static List<Pair<java.lang.String,java.lang.Integer>> readXLSX(java.lang.String) throws java.io.IOException	numberOfLines	B10	1/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vn	B4	4/5
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vn	B5	3/4
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vn	B7	2/3
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.Calculate_Indicators.CalculateIndicators	public static List<Pair<java.lang.String,java.lang.Integer>> countIndicators(List<Pair<java.lang.String,java.lang.String>>) 	vn	B9	1/2
+ES_2Sem_2021_Grupo_23.CodeQualityAssessor.GUI.Gui	public void actionPerformed(java.awt.event.ActionEvent) 	fc	B1	16/21
